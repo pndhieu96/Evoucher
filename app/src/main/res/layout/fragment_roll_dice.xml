@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/diceContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/roll_dice_bg"
+    android:orientation="vertical"
+    android:padding="10dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:background="@drawable/roll_dice_title_bg"
+        android:layout_gravity="center_horizontal"
+        android:padding="5dp"
+        android:layout_marginTop="50dp"
+        android:text="Lắc máy hoặc chạm vào màn hình\nđể đổ xí ngầu"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="139dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/die1"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/d6" />
+
+        <ImageView
+            android:id="@+id/die2"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/d6" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wheel_view"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:text="Quay lần: 0"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/tv_count"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:text="Tổng điểm: 0"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_receive_gift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_total"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:width="200dp"
+        android:height="50dp"
+        android:background="@drawable/btn_roll_dice_bg"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="Nhận quà"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
+    <TextView
+        android:id="@+id/tv_des_rotary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/btn_rotary"
+        android:layout_centerInParent="true"
+        android:text="Lắc 3 lần để nhận coupon"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
+</LinearLayout>

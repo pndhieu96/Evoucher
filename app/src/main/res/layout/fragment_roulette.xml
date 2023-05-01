@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.manhnd.demo.MainActivity">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/rouletee_game_main"
+            android:layout_centerHorizontal="true"
+            android:text="Con số may mắn của bạn là"/>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:rotation="180"
+            android:layout_below="@+id/tv_title"
+            app:srcCompat="?android:attr/textSelectHandle" />
+
+        <com.example.evoucher.customView.wheelview.WheelView
+            android:id="@+id/wheel_view"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView2"
+            android:layout_centerInParent="true"
+            app:emptyItemColor="@color/green_900"
+            app:repeatItems="true"
+            app:rotatableWheelDrawable="false"
+            app:selectionColor="@color/teal_900"
+            app:wheelColor="@color/grey_400"
+            app:wheelDrawable="@mipmap/bg_roulette"
+            app:wheelItemCount="6"
+            app:wheelItemRadius="@dimen/wheel_item_radius"
+            app:wheelPaddingInside="@dimen/wheel_padding_inside"
+            app:selectionPadding="4dp"
+            app:wheelPadding="@dimen/wheel_padding"
+            app:wheelRadius="@dimen/wheel_radius" />
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wheel_view"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:text="Quay lần: 0"
+            android:textColor="@color/rouletee_game_main"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_count"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:text="Tổng điểm: 0"
+            android:textColor="@color/rouletee_game_main"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_rotary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_total"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:width="200dp"
+            android:height="50dp"
+            android:background="@drawable/btn_roulette_bg"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="Quay"
+            android:textColor="@color/rouletee_game_main" />
+
+        <TextView
+            android:id="@+id/tv_des_rotary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_rotary"
+            android:layout_centerInParent="true"
+            android:text="Quay 3 lần để nhận coupon"
+            android:textColor="@color/rouletee_game_main" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_receive_gift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_des_rotary"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:width="200dp"
+            android:height="50dp"
+            android:background="@drawable/btn_roulette_bg"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="Nhận quà"
+            android:textColor="@color/rouletee_game_main" />
+    </RelativeLayout>
+</layout>

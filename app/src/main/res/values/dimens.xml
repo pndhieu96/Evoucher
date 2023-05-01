@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="wheel_item_radius">28dp</dimen>
+    <dimen name="wheel_radius">150dp</dimen>
+    <dimen name="wheel_padding">8dp</dimen>
+    <dimen name="wheel_padding_inside">6dp</dimen>
+    <dimen name="wheel_offset">8dp</dimen>
+</resources>
