@@ -4,7 +4,7 @@
     android:id="@+id/diceContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/roll_dice_bg"
+    android:background="@drawable/bg_roll_dice"
     android:orientation="vertical"
     android:padding="10dp">
     <TextView
@@ -14,7 +14,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:gravity="center_horizontal"
-        android:background="@drawable/roll_dice_title_bg"
+        android:background="@drawable/bg_roll_dice_title"
         android:layout_gravity="center_horizontal"
         android:padding="5dp"
         android:layout_marginTop="50dp"

@@ -4,15 +4,14 @@ import com.example.codebaseandroidapp.base.BaseFragment
 import com.example.evoucher.databinding.FragmentLuckyNumberBinding
 import com.example.evoucher.utils.Utils
 import kotlinx.coroutines.*
-import java.util.*
 
-class LuckyNumberFragment : BaseFragment<FragmentLuckyNumberBinding>(FragmentLuckyNumberBinding::inflate) {
+class GameLuckyNumberFragment : BaseFragment<FragmentLuckyNumberBinding>(FragmentLuckyNumberBinding::inflate) {
     var count = 0;
     val job = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + job)
     companion object {
         @JvmStatic
-        fun newInstance() = LuckyNumberFragment()
+        fun newInstance() = GameLuckyNumberFragment()
     }
 
     override fun initObserve() {

@@ -104,17 +104,17 @@
     </fragment>
     <fragment
         android:id="@+id/rollDiceFragment"
-        android:name="com.example.evoucher.ui.RollDiceFragment"
+        android:name="com.example.evoucher.ui.GameRollDiceFragment"
         android:label="fragment_roll_dice"
         tools:layout="@layout/fragment_roll_dice" />
     <fragment
         android:id="@+id/luckyNumberFragment"
-        android:name="com.example.evoucher.ui.LuckyNumberFragment"
+        android:name="com.example.evoucher.ui.GameLuckyNumberFragment"
         android:label="fragment_lucky_number"
         tools:layout="@layout/fragment_lucky_number" />
     <fragment
         android:id="@+id/rouletteFragment"
-        android:name="com.example.evoucher.ui.RouletteFragment"
+        android:name="com.example.evoucher.ui.GameRouletteFragment"
         android:label="fragment_roulette"
         tools:layout="@layout/fragment_roulette" />
 </navigation>

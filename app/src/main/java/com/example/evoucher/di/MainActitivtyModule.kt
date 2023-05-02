@@ -28,14 +28,6 @@ class MainActitvityModule {
     @Retention(AnnotationRetention.BINARY)
     annotation class MainActivityLifeCycle
 
-    @Qualifier
-    @Retention(AnnotationRetention.BINARY)
-    annotation class MainActivityBinding
-
-    @Qualifier
-    @Retention(AnnotationRetention.BINARY)
-    annotation class MainActivityTabLayoutMediator
-
     @Provides
     @MainActivityFragmentManager
     fun provideMainActivityFragmentManager(@ActivityContext context: Context) : FragmentManager {

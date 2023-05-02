@@ -1,6 +1,5 @@
 package com.example.evoucher.ui
 
-import android.content.Context.SENSOR_SERVICE
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.view.View
@@ -9,12 +8,11 @@ import com.example.codebaseandroidapp.base.BaseFragment
 import com.example.evoucher.R
 import com.example.evoucher.databinding.FragmentRollDiceBinding
 import com.example.evoucher.utils.ShakeDetector
-import com.example.evoucher.utils.ShakeDetector.OnShakeListener
 import com.example.evoucher.utils.Utils
 import kotlinx.coroutines.*
 
 
-class RollDiceFragment : BaseFragment<FragmentRollDiceBinding>(FragmentRollDiceBinding::inflate) {
+class GameRollDiceFragment : BaseFragment<FragmentRollDiceBinding>(FragmentRollDiceBinding::inflate) {
 
     private var delayTime = 80
     private var rollAnimations = 10
@@ -103,6 +101,6 @@ class RollDiceFragment : BaseFragment<FragmentRollDiceBinding>(FragmentRollDiceB
 
     companion object {
         @JvmStatic
-        fun newInstance() = RollDiceFragment()
+        fun newInstance() = GameRollDiceFragment()
     }
 }

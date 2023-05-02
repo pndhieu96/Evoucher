@@ -3,8 +3,11 @@ package com.example.evoucher.utils
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class SharedPreferencesImp {
     companion object {
         const val TOKEN = "token"
@@ -15,8 +18,8 @@ class SharedPreferencesImp {
     var sharedPreference: SharedPreferences
     var editor: SharedPreferences.Editor
 
-    @Inject constructor(activity: Activity) {
-        sharedPreference =  activity.getSharedPreferences("APP_PRE", Context.MODE_PRIVATE)
+    @Inject constructor(@ApplicationContext context: Context) {
+        sharedPreference =  context.getSharedPreferences("APP_PRE", Context.MODE_PRIVATE)
         editor = sharedPreference.edit()
     }
 

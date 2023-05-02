@@ -5,4 +5,10 @@
     <dimen name="wheel_padding">8dp</dimen>
     <dimen name="wheel_padding_inside">6dp</dimen>
     <dimen name="wheel_offset">8dp</dimen>
+
+    <dimen name="screen_top">5dp</dimen>
+    <dimen name="screen_horizontal">5dp</dimen>
+
+    <dimen name="text_size_title">25dp</dimen>
+    <dimen name="text_size_normal">18dp</dimen>
 </resources>

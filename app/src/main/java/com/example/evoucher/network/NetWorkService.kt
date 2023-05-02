@@ -1,10 +1,7 @@
 package com.example.evoucher.network
 
 import com.example.codebaseandroidapp.base.BaseRepo
-import com.example.evoucher.model.ApiResult
-import com.example.evoucher.model.Resource
-import com.example.evoucher.model.UserApiResult
-import com.example.evoucher.model.UserResult
+import com.example.evoucher.model.*
 import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -27,6 +24,18 @@ class NetWorkService @Inject constructor(
     suspend fun login(jsonObject: String) : Resource<UserApiResult> {
         return safeApiCall { apiService?.login(jsonObject)!! }
     }
+
+    suspend fun getIndustries() : Resource<IndustriesApiResult> {
+        return safeApiCall { apiService?.getIndustries()!! }
+    }
+
+    suspend fun getCampaigns() : Resource<CampaignsApiResult> {
+        return safeApiCall { apiService?.getCampaigns()!! }
+    }
+
+    suspend fun getPartners() : Resource<PartnersApiResult> {
+        return safeApiCall { apiService?.getPartners()!! }
+    }
 }
 
 interface ApiService {
@@ -35,5 +44,11 @@ interface ApiService {
     suspend fun login(@Body jsonObject: String) : Response<UserApiResult>
 
     @GET("NganhHang/GetAllNganhHang")
-    suspend fun getAllNganhHang()
+    suspend fun getIndustries() : Response<IndustriesApiResult>
+
+    @GET("User/GetDoiTac")
+    suspend fun getPartners() : Response<PartnersApiResult>
+
+    @GET("ChienDich/GetAll")
+    suspend fun getCampaigns() : Response<CampaignsApiResult>
 }

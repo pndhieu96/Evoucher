@@ -12,6 +12,8 @@ import androidx.lifecycle.LiveData
 import com.example.evoucher.model.ApiError
 import com.example.evoucher.model.Resource
 import com.example.evoucher.model.ResourceStatus
+import com.example.evoucher.utils.ConstantUtils.Companion.TYPE_IMAGE_CAMPAIGN
+import com.example.evoucher.utils.ConstantUtils.Companion.TYPE_IMAGE_PARTNER
 import java.util.*
 
 
@@ -69,6 +71,16 @@ class Utils {
         fun random(min: Int, max: Int) : Int {
             val random: Int = Random().nextInt(max - min + 1) + min
             return random;
+        }
+
+        fun getImageUrl(name: String, type: Int) : String {
+            if(type == TYPE_IMAGE_CAMPAIGN) {
+                return "https://ptc3.ngoinhaso.vn/images/AnhChienDich/$name";
+            } else if(type == TYPE_IMAGE_PARTNER) {
+                return "https://ptc3.ngoinhaso.vn/images/LogoDoiTac/$name";
+            } else {
+                return "https://ptc3.ngoinhaso.vn/images/AnhChiNhanh/$name";
+            }
         }
     }
 }

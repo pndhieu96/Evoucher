@@ -23,8 +23,8 @@ class LoginVM @Inject constructor(
         _UserResult.value = Resource.Loading()
         viewModelScope.launch {
             var jsonObject = JSONObject()
-            jsonObject.put("userName", "haihakh")
-            jsonObject.put("password", "111111")
+            jsonObject.put("userName", user)
+            jsonObject.put("password", pass)
             val resourceLogin = netWorkService.login(jsonObject.toString())
             if(resourceLogin.status == ResourceStatus.SUCCESS) {
                 var mUserResult =  Resource.Success(data = resourceLogin.data?.result)

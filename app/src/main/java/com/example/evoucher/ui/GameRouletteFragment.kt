@@ -3,7 +3,6 @@ package com.example.evoucher.ui
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Handler
-import android.view.View
 import com.example.codebaseandroidapp.base.BaseFragment
 import com.example.evoucher.R
 import com.example.evoucher.customView.wheelview.ItemDrawable
@@ -12,7 +11,7 @@ import com.example.evoucher.customView.wheelview.adapter.WheelArrayAdapter
 import com.example.evoucher.databinding.FragmentRouletteBinding
 import com.example.evoucher.utils.Utils
 
-class RouletteFragment : BaseFragment<FragmentRouletteBinding>(FragmentRouletteBinding::inflate) {
+class GameRouletteFragment : BaseFragment<FragmentRouletteBinding>(FragmentRouletteBinding::inflate) {
 
     private var mRunnable: Runnable? = null
     private var mHandler = Handler()
@@ -58,7 +57,7 @@ class RouletteFragment : BaseFragment<FragmentRouletteBinding>(FragmentRouletteB
 
     companion object {
         @JvmStatic
-        fun newInstance() = RouletteFragment()
+        fun newInstance() = GameRouletteFragment()
     }
 
     private fun setupData() {
