@@ -1,60 +1,92 @@
 package com.example.evoucher.ui
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.app.Activity
 import android.view.View
-import android.view.ViewGroup
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
+import com.example.codebaseandroidapp.base.BaseFragment
 import com.example.evoucher.R
+import com.example.evoucher.adapter.CampaignAdapter
+import com.example.evoucher.adapter.SearchAdapter
+import com.example.evoucher.customView.CustomToast
+import com.example.evoucher.customView.TopBar
+import com.example.evoucher.databinding.FragmentSearchBinding
+import com.example.evoucher.model.Campaign
+import com.example.evoucher.utils.Utils
+import com.example.evoucher.utils.Utils.Companion.observer
+import com.example.evoucher.viewModel.SearchVM
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+@AndroidEntryPoint
+class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class SearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val searchVM: SearchVM by viewModels()
+    lateinit var adapter: SearchAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun initObserve() {
+        searchVM.canpaigns.observer(
+            viewLifecycleOwner,
+            onSuccess = {
+                binding.pbLoading.visibility = GONE
+                if(it.size > 0) {
+                    adapter.list = it
+                    adapter.notifyDataSetChanged()
+                    binding.tvNotFound.visibility = GONE
+                    binding.rv.visibility = VISIBLE
+                } else {
+                    binding.tvNotFound.visibility = VISIBLE
+                    binding.rv.visibility = GONE
+                }
+            }, onError = {
+                showError(it.statusMessage[0])
+                binding.tvNotFound.visibility = VISIBLE
+            }, onLoading = {
+                binding.pbLoading.visibility = VISIBLE
+            }
+        )
+    }
+
+    override fun initialize() {
+        searchVM.getCampaigns("")
+
+        binding.rv.visibility = VISIBLE
+        binding.tvNotFound.visibility = GONE
+
+        adapter = SearchAdapter(arrayListOf())
+        binding.rv.adapter = adapter
+        adapter.callBack = object : SearchAdapter.CallBack {
+            override fun onClick(item: Campaign) {
+
+            }
+        }
+
+        binding.ivSearch.setOnClickListener {
+            searchVM.getCampaigns(binding.et.text.toString())
+            Utils.hideKeyboard(activity as Activity)
+        }
+
+        binding.et.addTextChangedListener {
+            if(binding.et.text.isEmpty()) {
+                searchVM.getCampaigns("")
+            }
+        }
+
+        binding.tb.setTitle("Tìm kiếm chiến dịch")
+        binding.tb.callBack = object : TopBar.CallBack {
+            override fun onClick() {
+                navController.popBackStack()
+            }
+
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+    private fun showError(messager: String) {
+        CustomToast.makeText(context, messager, CustomToast.LENGTH_LONG, CustomToast.ERROR, false).show()
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SearchFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = SearchFragment()
     }
 }

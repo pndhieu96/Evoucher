@@ -30,7 +30,7 @@ class LoginVM @Inject constructor(
                 var mUserResult =  Resource.Success(data = resourceLogin.data?.result)
                 _UserResult.value = mUserResult as Resource<UserResult>
             } else {
-                _UserResult.value = Resource.Error(ApiError())
+                _UserResult.value = Resource.Error(resourceLogin.error!!)
             }
         }
     }

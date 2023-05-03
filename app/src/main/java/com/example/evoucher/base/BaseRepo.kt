@@ -20,6 +20,9 @@ abstract class BaseRepo {
                     Resource.Success(data = response.body()!!)
                 } else {
                     val apiError = Gson().fromJson(response.errorBody()?.string(), ApiError::class.java)
+                    if(apiError.statusMessage.size == 0) {
+                        apiError.statusMessage.add("Something went wrong")
+                    }
                     Resource.Error(apiError)
                 }
             } catch (e:HttpException) {

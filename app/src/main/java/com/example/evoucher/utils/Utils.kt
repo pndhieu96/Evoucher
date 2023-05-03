@@ -14,6 +14,9 @@ import com.example.evoucher.model.Resource
 import com.example.evoucher.model.ResourceStatus
 import com.example.evoucher.utils.ConstantUtils.Companion.TYPE_IMAGE_CAMPAIGN
 import com.example.evoucher.utils.ConstantUtils.Companion.TYPE_IMAGE_PARTNER
+import java.text.Normalizer
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -82,5 +85,19 @@ class Utils {
                 return "https://ptc3.ngoinhaso.vn/images/AnhChiNhanh/$name";
             }
         }
+
+        fun stringToDate(dateStr: String) : Date {
+            val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+            try {
+                val date: Date = format.parse(dateStr)
+                return date
+            } catch (e: ParseException) {
+                return Date()
+            }
+        }
+
+        fun String.removeNonSpacingMarks() =
+            Normalizer.normalize(this, Normalizer.Form.NFD)
+                .replace("\\p{Mn}+".toRegex(), "")
     }
 }

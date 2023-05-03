@@ -1,60 +1,69 @@
 package com.example.evoucher.ui
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.example.evoucher.R
+import androidx.fragment.app.viewModels
+import com.example.codebaseandroidapp.base.BaseFragment
+import com.example.evoucher.adapter.CampaignAdapter
+import com.example.evoucher.adapter.SearchAdapter
+import com.example.evoucher.customView.CustomToast
+import com.example.evoucher.customView.TopBar
+import com.example.evoucher.databinding.FragmentCampaignsBinding
+import com.example.evoucher.model.Campaign
+import com.example.evoucher.utils.Utils.Companion.observer
+import com.example.evoucher.viewModel.CampaignsVM
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+@AndroidEntryPoint
+class CampaignsFragment :
+    BaseFragment<FragmentCampaignsBinding>(FragmentCampaignsBinding::inflate) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CampaignsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class CampaignsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val campaignsVM: CampaignsVM by viewModels()
+    lateinit var adapter: SearchAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun initObserve() {
+        campaignsVM.canpaigns.observer(
+            viewLifecycleOwner,
+            onSuccess = {
+                binding.pbLoading.visibility = View.GONE
+                if(it.size > 0) {
+                    adapter.list = it
+                    adapter.notifyDataSetChanged()
+                    binding.rv.visibility = View.VISIBLE
+                } else {
+                    binding.rv.visibility = View.GONE
+                }
+            }, onError = {
+                showError(it.statusMessage[0])
+            }, onLoading = {
+                binding.pbLoading.visibility = View.VISIBLE
+            }
+        )
+    }
+
+    override fun initialize() {
+        campaignsVM.getCampaigns("")
+        adapter = SearchAdapter(arrayListOf())
+        binding.rv.adapter = adapter
+        adapter.callBack = object : SearchAdapter.CallBack {
+            override fun onClick(item: Campaign) {
+
+            }
+        }
+
+        binding.tb.setTitle("Danh sách chiến dịch")
+        binding.tb.callBack = object : TopBar.CallBack {
+            override fun onClick() {
+                navController.popBackStack()
+            }
+
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_campaigns, container, false)
+    private fun showError(messager: String) {
+        CustomToast.makeText(context, messager, CustomToast.LENGTH_LONG, CustomToast.ERROR, false).show()
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CampaignsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CampaignsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = CampaignsFragment()
     }
 }

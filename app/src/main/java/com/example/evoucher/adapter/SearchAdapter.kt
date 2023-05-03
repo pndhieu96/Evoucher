@@ -12,6 +12,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.evoucher.R
 import com.example.evoucher.databinding.ItemCampaignBinding
+import com.example.evoucher.databinding.ItemSearchBinding
 import com.example.evoucher.model.Campaign
 import com.example.evoucher.utils.ConstantUtils.Companion.TYPE_IMAGE_CAMPAIGN
 import com.example.evoucher.utils.Utils
@@ -19,15 +20,15 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 
 
-class CampaignAdapter(var list : List<Campaign>) :
-    RecyclerView.Adapter<CampaignAdapter.ViewHolder>() {
+class SearchAdapter(var list : List<Campaign>) :
+    RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     lateinit var context: Context
     var callBack : CallBack? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
         val inflate = LayoutInflater.from(context)
-        return ViewHolder(ItemCampaignBinding.inflate(inflate))
+        return ViewHolder(ItemSearchBinding.inflate(inflate))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -64,5 +65,5 @@ class CampaignAdapter(var list : List<Campaign>) :
         fun onClick(item: Campaign)
     }
 
-    class ViewHolder(var binding: ItemCampaignBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(var binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root)
 }

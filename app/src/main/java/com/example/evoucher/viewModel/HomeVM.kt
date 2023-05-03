@@ -34,7 +34,7 @@ class HomeVM @Inject constructor(val netWorkService: NetWorkService) : ViewModel
                 var industriesResource =  Resource.Success(data = resource.data?.result)
                 _industries.value = industriesResource
             } else {
-                _industries.value = Resource.Error(ApiError())
+                _industries.value = Resource.Error(resource.error!!)
             }
         }
     }
@@ -44,10 +44,17 @@ class HomeVM @Inject constructor(val netWorkService: NetWorkService) : ViewModel
         viewModelScope.launch {
             val resource = netWorkService.getCampaigns()
             if(resource.status == ResourceStatus.SUCCESS) {
-                var campainResource =  Resource.Success(data = resource.data?.result)
+                var list = listOf<Campaign>()
+                resource.data?.result?.let {
+                    list = it
+                }
+                if(list?.size!! >= 5) {
+                    list = list.subList(0,5)
+                }
+                val campainResource =  Resource.Success(data = list)
                 _campaigns.value = campainResource
             } else {
-                _campaigns.value = Resource.Error(ApiError())
+                _campaigns.value = Resource.Error(resource.error!!)
             }
         }
     }
@@ -60,7 +67,7 @@ class HomeVM @Inject constructor(val netWorkService: NetWorkService) : ViewModel
                 var partnersResource =  Resource.Success(data = resource.data?.result)
                 _partners.value = partnersResource
             } else {
-                _partners.value = Resource.Error(ApiError())
+                _partners.value = Resource.Error(resource.error!!)
             }
         }
     }
