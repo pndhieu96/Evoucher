@@ -58,7 +58,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.rv.adapter = adapter
         adapter.callBack = object : SearchAdapter.CallBack {
             override fun onClick(item: Campaign) {
-
+                navController.navigate(R.id.action_searchFragment_to_campaignDetailFragment)
             }
         }
 

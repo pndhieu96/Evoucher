@@ -3,6 +3,7 @@ package com.example.evoucher.ui
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.codebaseandroidapp.base.BaseFragment
+import com.example.evoucher.R
 import com.example.evoucher.adapter.CampaignAdapter
 import com.example.evoucher.adapter.SearchAdapter
 import com.example.evoucher.customView.CustomToast
@@ -46,7 +47,7 @@ class CampaignsFragment :
         binding.rv.adapter = adapter
         adapter.callBack = object : SearchAdapter.CallBack {
             override fun onClick(item: Campaign) {
-
+                navController.navigate(R.id.action_campaignsFragment_to_campaignDetailFragment)
             }
         }
 
