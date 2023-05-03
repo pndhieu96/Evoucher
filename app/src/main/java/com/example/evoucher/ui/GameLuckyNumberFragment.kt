@@ -3,8 +3,10 @@ package com.example.evoucher.ui
 import com.example.codebaseandroidapp.base.BaseFragment
 import com.example.evoucher.databinding.FragmentLuckyNumberBinding
 import com.example.evoucher.utils.Utils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 
+@AndroidEntryPoint
 class GameLuckyNumberFragment : BaseFragment<FragmentLuckyNumberBinding>(FragmentLuckyNumberBinding::inflate) {
     var count = 0;
     val job = Job()

@@ -10,7 +10,9 @@ import com.example.evoucher.R
 import com.example.evoucher.customView.TopBar
 import com.example.evoucher.databinding.FragmentCampaignDetailBinding
 import com.example.evoucher.databinding.FragmentCampaignsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CampaignDetailFragment : BaseFragment<FragmentCampaignDetailBinding>(FragmentCampaignDetailBinding::inflate) {
 
     override fun initObserve() {

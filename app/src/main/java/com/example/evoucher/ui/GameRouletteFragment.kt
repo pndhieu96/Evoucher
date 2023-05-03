@@ -10,7 +10,9 @@ import com.example.evoucher.customView.wheelview.WheelView
 import com.example.evoucher.customView.wheelview.adapter.WheelArrayAdapter
 import com.example.evoucher.databinding.FragmentRouletteBinding
 import com.example.evoucher.utils.Utils
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GameRouletteFragment : BaseFragment<FragmentRouletteBinding>(FragmentRouletteBinding::inflate) {
 
     private var mRunnable: Runnable? = null

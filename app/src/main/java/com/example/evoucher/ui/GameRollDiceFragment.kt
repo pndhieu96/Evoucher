@@ -9,9 +9,10 @@ import com.example.evoucher.R
 import com.example.evoucher.databinding.FragmentRollDiceBinding
 import com.example.evoucher.utils.ShakeDetector
 import com.example.evoucher.utils.Utils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 
-
+@AndroidEntryPoint
 class GameRollDiceFragment : BaseFragment<FragmentRollDiceBinding>(FragmentRollDiceBinding::inflate) {
 
     private var delayTime = 80
