@@ -33,7 +33,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         LoginVM.userResult.observer(
             viewLifecycleOwner,
             onSuccess = {
-                Log.d("userResult", it.user?.username.toString())
                 binding.pbLoading.visibility = View.GONE
 
                 sPregerences.putString(SharedPreferencesImp.TOKEN, it.token ?: "")

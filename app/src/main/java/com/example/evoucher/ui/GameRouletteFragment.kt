@@ -3,6 +3,7 @@ package com.example.evoucher.ui
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Handler
+import androidx.fragment.app.FragmentManager
 import com.example.codebaseandroidapp.base.BaseFragment
 import com.example.evoucher.R
 import com.example.evoucher.customView.wheelview.ItemDrawable
@@ -36,12 +37,10 @@ class GameRouletteFragment : BaseFragment<FragmentRouletteBinding>(FragmentRoule
 
         binding.btnRotary.setOnClickListener{
             count++
-            currentPosition = Utils.Companion.random(0,5)
+            currentPosition = Utils.random(0,5)
+            binding.btnRotary.isClickable = false
             binding.wheelView.startRoulette(currentPosition)
             total += listStrings.get(currentPosition).toInt()
-
-            binding.tvTotal.text = "Tổng điểm: ${total}"
-            binding.tvCount.text = "Quay lần: ${count}"
 
             if(count == 3){
                 binding.btnRotary.isEnabled = false
@@ -54,6 +53,10 @@ class GameRouletteFragment : BaseFragment<FragmentRouletteBinding>(FragmentRoule
                 binding.btnReceiveGift.isEnabled = false
                 binding.btnReceiveGift.alpha = 0.5f
             }
+        }
+
+        binding.btnReceiveGift.setOnClickListener {
+            showNotification("Thông báo", "Chúc bạn may mắn lần sau")
         }
     }
 
@@ -81,11 +84,13 @@ class GameRouletteFragment : BaseFragment<FragmentRouletteBinding>(FragmentRoule
                 }
                 if (mRunnable == null) {
                     mRunnable = Runnable {
-                        //Xu ly sau khi quay xong
+                        binding.tvTotal.text = "Tổng điểm: ${total}"
+                        binding.tvCount.text = "Quay lần: ${count}"
+                        binding.btnRotary.isClickable = true
                     }
                 }
                 if (mHandler == null) mHandler = Handler()
-                mHandler.postDelayed(mRunnable!!, 1000)
+                mHandler.postDelayed(mRunnable!!, 500)
             }
         })
     }
@@ -114,5 +119,14 @@ class GameRouletteFragment : BaseFragment<FragmentRouletteBinding>(FragmentRoule
             }
             return ItemDrawable(mContext, text, color)
         }
+    }
+
+    private fun showNotification(title: String, des: String) {
+        var notificationFragment = NotificationFragment.newInstance(title, des, object : NotificationFragment.CallBack{
+            override fun close() {
+                navController.popBackStack()
+            }
+        })
+        notificationFragment.show(childFragmentManager, "NotificationFragment")
     }
 }

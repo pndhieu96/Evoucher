@@ -31,16 +31,21 @@ class GameLuckyNumberFragment : BaseFragment<FragmentLuckyNumberBinding>(Fragmen
                 if(count != 3) takeNumber()
             }
         }
+
+        binding.btnReceiveGift.setOnClickListener {
+            showNotification("Thông báo", "Chúc bạn may mắn lần sau")
+        }
     }
 
     private suspend fun takeNumber() {
         count++;
         var luckyNumber = 0
+        binding.btnTakeNumber.isClickable = false
         for(i in 1..10) {
-            binding.tvLuckyNumber.text = Utils.Companion.random(1,100).toString()
+            binding.tvLuckyNumber.text = Utils.random(1,100).toString()
             delay(100)
         }
-        luckyNumber = Utils.Companion.random(1,100)
+        luckyNumber = Utils.random(1,100)
         binding.tvLuckyNumber.text = luckyNumber.toString()
 
         if(count == 1) {
@@ -61,5 +66,15 @@ class GameLuckyNumberFragment : BaseFragment<FragmentLuckyNumberBinding>(Fragmen
             binding.btnReceiveGift.isEnabled = false
             binding.btnReceiveGift.alpha = 0.5f
         }
+        binding.btnTakeNumber.isClickable = true
+    }
+
+    private fun showNotification(title: String, des: String) {
+        var notificationFragment = NotificationFragment.newInstance(title, des, object : NotificationFragment.CallBack{
+            override fun close() {
+                navController.popBackStack()
+            }
+        })
+        notificationFragment.show(childFragmentManager, "NotificationFragment")
     }
 }

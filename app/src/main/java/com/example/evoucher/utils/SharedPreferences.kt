@@ -3,6 +3,7 @@ package com.example.evoucher.utils
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.evoucher.model.Partner
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -12,6 +13,7 @@ class SharedPreferencesImp {
     companion object {
         const val TOKEN = "token"
         const val USER_INFO = "user_info"
+        const val PARTNERS_INFO = "partners_info"
         const val IS_SAVE_ACCOUNT = "is_save_account"
     }
 

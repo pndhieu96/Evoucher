@@ -41,6 +41,15 @@ class GameRollDiceFragment : BaseFragment<FragmentRollDiceBinding>(FragmentRollD
     }
 
     override fun initialize() {
+        mSensorManager = getSystemService(requireContext(), SensorManager::class.java)
+        mAccelerometer = mSensorManager?.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        mShakeDetector = ShakeDetector()
+        mShakeDetector?.setOnShakeListener{ countShake ->
+            uiScope.launch {
+                if (count != 3) rollDice()
+            }
+        }
+
         binding.btnReceiveGift.isEnabled = false
         binding.btnReceiveGift.alpha = 0.39f
         binding.diceContainer.setOnClickListener(View.OnClickListener {
@@ -49,13 +58,8 @@ class GameRollDiceFragment : BaseFragment<FragmentRollDiceBinding>(FragmentRollD
             }
         })
 
-        mSensorManager = getSystemService(requireContext(), SensorManager::class.java)
-        mAccelerometer = mSensorManager?.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-        mShakeDetector = ShakeDetector()
-        mShakeDetector?.setOnShakeListener{ countShake ->
-            uiScope.launch {
-                if (count != 3) rollDice()
-            }
+        binding.btnReceiveGift.setOnClickListener {
+            showNotification("Thông báo", "Chúc bạn may mắn lần sau")
         }
     }
 
@@ -98,6 +102,15 @@ class GameRollDiceFragment : BaseFragment<FragmentRollDiceBinding>(FragmentRollD
             binding.btnReceiveGift.isEnabled = true
             binding.btnReceiveGift.alpha = 1f
         }
+    }
+
+    private fun showNotification(title: String, des: String) {
+        var notificationFragment = NotificationFragment.newInstance(title, des, object : NotificationFragment.CallBack{
+            override fun close() {
+                navController.popBackStack()
+            }
+        })
+        notificationFragment.show(childFragmentManager, "NotificationFragment")
     }
 
     companion object {

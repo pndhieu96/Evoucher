@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("MainActivity", "onResume")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (navController.currentDestination?.id == R.id.homeFragment
             || navController.currentDestination?.id == R.id.loginFragment) {

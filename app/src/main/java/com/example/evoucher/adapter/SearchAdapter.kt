@@ -49,7 +49,7 @@ class SearchAdapter(var list : List<Campaign>) :
         binding.tvDes.text = item.mota
         try {
             val date = Utils.stringToDate(item.createdDate.toString())
-            val dateFormat = SimpleDateFormat("dd/MM")
+            val dateFormat = SimpleDateFormat("dd/MM/yy")
             binding.tvDate.text =dateFormat.format(date)
         } catch (e: ParseException) {
             e.printStackTrace()

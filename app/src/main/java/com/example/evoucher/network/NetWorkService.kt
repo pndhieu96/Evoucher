@@ -49,6 +49,6 @@ interface ApiService {
     @GET("User/GetDoiTac")
     suspend fun getPartners() : Response<PartnersApiResult>
 
-    @GET("ChienDich/GetAll")
+    @GET("ChienDich/GetAllDetailed")
     suspend fun getCampaigns() : Response<CampaignsApiResult>
 }

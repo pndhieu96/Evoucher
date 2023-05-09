@@ -9,25 +9,153 @@ tools:context=".ui.AccountFragment">
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.example.evoucher.customView.TopBar
+            android:id="@+id/tb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <LinearLayout
             android:id="@+id/ll_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/tb">
 
-            <com.example.evoucher.customView.TopBar
-                android:id="@+id/tb"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="300dp">
 
-            <Button
-                android:id="@+id/btnGames"
+                <ImageView
+                    android:id="@+id/iv_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/banhkeo_bibica_chiendich3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="136dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:clickable="true"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_item_campaign"
+                    android:layout_marginTop="150dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_avatar"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:layout_margin="3dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            style="@style/SubTitleText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:layout_marginTop="10dp"
+                            tools:text="ten doi ta ten doi ta ten doi ta ten doi ta" />
+
+                        <TextView
+                            android:id="@+id/tv_partner"
+                            style="@style/NormalText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            tools:text="ten doi ta" />
+                        <TextView
+                            android:id="@+id/tv_date"
+                            style="@style/NormalText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            tools:text="ten doi ta" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_address"
+                style="@style/NormalText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="20dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                tools:text="lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem"
+                />
+
+            <TextView
+                android:id="@+id/tv_des"
+                style="@style/NormalText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:maxLines="6"
+                android:ellipsize="end"
+                tools:text="lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem"
+                />
+
+            <TextView
+                android:id="@+id/tv_voucher"
+                style="@style/NormalText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Gồm các loại coupon: 20%, 30%, 50%"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/NormalText"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Trò chơi"
-                />
+                android:text="Chơi để nhận coupon"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/SubTitleText"
+                android:id="@+id/btnGames"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_btn_play_game"
+                android:text="Chơi ngay game hay!" />
         </LinearLayout>
 
         <ProgressBar

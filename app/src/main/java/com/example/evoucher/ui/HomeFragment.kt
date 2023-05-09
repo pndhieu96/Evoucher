@@ -1,5 +1,6 @@
 package com.example.evoucher.ui
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.codebaseandroidapp.base.BaseFragment
@@ -12,9 +13,12 @@ import com.example.evoucher.databinding.FragmentHomeBinding
 import com.example.evoucher.model.Campaign
 import com.example.evoucher.model.Industry
 import com.example.evoucher.model.Partner
+import com.example.evoucher.model.Partners
 import com.example.evoucher.utils.SharedPreferencesImp
+import com.example.evoucher.utils.SharedPreferencesImp.Companion.PARTNERS_INFO
 import com.example.evoucher.utils.Utils.Companion.observer
 import com.example.evoucher.viewModel.HomeVM
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,6 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     lateinit var campaignAdapter: CampaignAdapter
     lateinit var partnersAdapter: PartnersAdapter
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun initObserve() {
         homeVM.industries.observer(
             viewLifecycleOwner,
@@ -36,17 +41,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 industriesAdapter.list = it
                 industriesAdapter.notifyDataSetChanged()
             }, onError = {
-                showError(it.statusMessage[0])
+
             }, onLoading = {
+
             }
         )
         homeVM.partners.observer(
             viewLifecycleOwner,
             onSuccess = {
+                val partners = Partners()
+                partners.result = it
+                sPregerences.putString(PARTNERS_INFO, Gson().toJson(partners).toString())
                 partnersAdapter.list = it
                 partnersAdapter.notifyDataSetChanged()
             }, onError = {
-                showError(it.statusMessage[0])
+
             }, onLoading = {
             }
         )
@@ -57,6 +66,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 campaignAdapter.list = it
                 campaignAdapter.notifyDataSetChanged()
             }, onError = {
+                binding.pbLoading.visibility = View.GONE
                 showError(it.statusMessage[0])
             }, onLoading = {
                 binding.pbLoading.visibility = View.VISIBLE
@@ -84,7 +94,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.rvIndustries.adapter = industriesAdapter
         industriesAdapter.callBack = object : IndustriesAdapter.CallBack {
             override fun onClick(item: Industry) {
-                navController.navigate(R.id.action_homeFragment_to_campaignsFragment)
+                val action = HomeFragmentDirections.actionHomeFragmentToCampaignsFragment(
+                    CampaignsFragment.BY_INDUSTRY,
+                    null,
+                    item,
+                    campaignAdapter.list.toTypedArray()
+                )
+                navController.navigate(action)
             }
 
         }
@@ -93,16 +109,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.rvCampaign.adapter = campaignAdapter
         campaignAdapter.callBack = object : CampaignAdapter.CallBack {
             override fun onClick(item: Campaign) {
-                navController.navigate(R.id.action_homeFragment_to_campaignDetailFragment)
+                val action = HomeFragmentDirections.actionHomeFragmentToCampaignDetailFragment(item)
+                navController.navigate(action)
             }
-
         }
 
         partnersAdapter = PartnersAdapter(arrayListOf())
         binding.rvPartner.adapter = partnersAdapter
         partnersAdapter.callBack = object :PartnersAdapter.CallBack {
             override fun onClick(item: Partner) {
-                navController.navigate(R.id.action_homeFragment_to_campaignsFragment)
+                val action = HomeFragmentDirections.actionHomeFragmentToCampaignsFragment(
+                    CampaignsFragment.BY_PARTNER,
+                    item,
+                    null,
+                    campaignAdapter.list.toTypedArray()
+                )
+                navController.navigate(action)
             }
 
         }

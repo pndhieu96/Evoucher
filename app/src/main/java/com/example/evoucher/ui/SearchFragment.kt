@@ -54,11 +54,20 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.rv.visibility = VISIBLE
         binding.tvNotFound.visibility = GONE
 
+        binding.tb.setTitle("Tìm kiếm chiến dịch")
+        binding.tb.callBack = object : TopBar.CallBack {
+            override fun onClick() {
+                navController.popBackStack()
+            }
+
+        }
+
         adapter = SearchAdapter(arrayListOf())
         binding.rv.adapter = adapter
         adapter.callBack = object : SearchAdapter.CallBack {
             override fun onClick(item: Campaign) {
-                navController.navigate(R.id.action_searchFragment_to_campaignDetailFragment)
+                val action = SearchFragmentDirections.actionSearchFragmentToCampaignDetailFragment(item)
+                navController.navigate(action)
             }
         }
 
@@ -71,14 +80,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             if(binding.et.text.isEmpty()) {
                 searchVM.getCampaigns("")
             }
-        }
-
-        binding.tb.setTitle("Tìm kiếm chiến dịch")
-        binding.tb.callBack = object : TopBar.CallBack {
-            override fun onClick() {
-                navController.popBackStack()
-            }
-
         }
     }
 

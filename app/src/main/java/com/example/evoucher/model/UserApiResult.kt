@@ -1,6 +1,7 @@
 package com.example.evoucher.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -17,7 +18,7 @@ data class UserResult (
     @SerializedName("user"     ) var user     : User?     = User(),
     @SerializedName("moreInfo" ) var moreInfo : MoreInfo? = MoreInfo(),
     @SerializedName("token"    ) var token    : String?   = null
-)
+) : Serializable
 
 class User (
     @SerializedName("id"          ) var id          : Int?    = null,
@@ -37,5 +38,6 @@ data class MoreInfo (
     @SerializedName("phone"        ) var phone        : String? = null,
     @SerializedName("diaChi"       ) var diaChi       : String? = null,
     @SerializedName("ngaySinh"     ) var ngaySinh     : String? = null,
-    @SerializedName("thongTinKhac" ) var thongTinKhac : String? = null
+    @SerializedName("thongTinKhac" ) var thongTinKhac : String? = null,
+    @SerializedName("imgUrl") var imgUrl : String = ""
 )

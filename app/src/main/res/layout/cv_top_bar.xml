@@ -18,6 +18,7 @@
             android:layout_height="50dp"
             android:scaleType="fitStart"
             android:padding="3dp"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/ic_back"/>
 
         <TextView

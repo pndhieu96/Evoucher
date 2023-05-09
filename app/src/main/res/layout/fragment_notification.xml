@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_notification"
+    tools:context=".ui.NotificationFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/TitleText"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:background="@color/main_color_1"
+        android:textColor="@color/white"
+        android:padding="@dimen/screen_horizontal"
+        tools:text="@string/hello_blank_fragment" />
+
+    <TextView
+        android:id="@+id/tv_des"
+        style="@style/NormalText"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:padding="@dimen/screen_horizontal"
+        android:gravity="center"
+        tools:text="Chúc bạn may mắn lần sau Chúc bạn may mắn lần sau Chúc bạn may mắn lần sau Chúc bạn may mắn lần sau "/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_close"
+        style="@style/SubTitleText"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_btn_play_game"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:text="Đóng"/>
+</LinearLayout>

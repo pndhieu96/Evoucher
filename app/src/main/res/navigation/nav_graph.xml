@@ -48,7 +48,7 @@
             app:destination="@id/mapFragment" />
         <action
             android:id="@+id/action_homeFragment_to_campaignDetailFragment"
-            app:destination="@id/campaignDetailFragment" />
+            app:destination="@id/campaignDetailFragment"/>
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -64,6 +64,25 @@
         android:name="com.example.evoucher.ui.CampaignsFragment"
         android:label="fragment_campaigns"
         tools:layout="@layout/fragment_campaigns" >
+        <argument
+            android:name="typeArg"
+            app:argType="integer"
+            android:defaultValue="0"/>
+        <argument
+            android:name="partnerArg"
+            app:argType="com.example.evoucher.model.Partner"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+        <argument
+            android:name="industryArg"
+            app:argType="com.example.evoucher.model.Industry"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+        <argument
+            android:name="campaignsArg"
+            app:argType="com.example.evoucher.model.Campaign[]"
+            app:nullable="true"
+            android:defaultValue="@null"/>
         <action
             android:id="@+id/action_campaignsFragment_to_campaignDetailFragment"
             app:destination="@id/campaignDetailFragment" />
@@ -72,7 +91,11 @@
         android:id="@+id/accountFragment"
         android:name="com.example.evoucher.ui.AccountFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_couponDetailFragment"
+            app:destination="@id/couponDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.example.evoucher.ui.MapFragment"
@@ -83,6 +106,11 @@
         android:name="com.example.evoucher.ui.CampaignDetailFragment"
         android:label="fragment_campaign_detail"
         tools:layout="@layout/fragment_campaign_detail" >
+        <argument
+            android:name="campaignArg"
+            app:argType="com.example.evoucher.model.Campaign"
+            app:nullable="true"
+            android:defaultValue="@null"/>
         <action
             android:id="@+id/action_campaignDetailFragment_to_gamesFragment"
             app:destination="@id/gamesFragment" />
@@ -117,4 +145,9 @@
         android:name="com.example.evoucher.ui.GameRouletteFragment"
         android:label="fragment_roulette"
         tools:layout="@layout/fragment_roulette" />
+    <fragment
+        android:id="@+id/couponDetailFragment"
+        android:name="com.example.evoucher.ui.CouponDetailFragment"
+        android:label="fragment_coupon_detail"
+        tools:layout="@layout/fragment_coupon_detail" />
 </navigation>

@@ -1,12 +1,17 @@
 package com.example.evoucher.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class PartnersApiResult (
     @SerializedName("status_code"    ) var statusCode    : Int?     = null,
     @SerializedName("errorMessages" ) var statusMessage : ArrayList<String> = arrayListOf(),
     @SerializedName("isSuccess"        ) var success       : Boolean = false,
     @SerializedName("result"        ) var result        : List<Partner>?           = null,
+)
+
+data class Partners (
+    var result        : List<Partner>?           = listOf()
 )
 
 data class Partner (
@@ -21,4 +26,4 @@ data class Partner (
     @SerializedName("tenDoiTac" ) var tenDoiTac : String = "",
     @SerializedName("mota"      ) var mota      : String? = null,
     @SerializedName("imgUrl"    ) var imgUrl    : String = ""
-)
+) : Serializable
