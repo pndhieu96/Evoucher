@@ -94,7 +94,10 @@ class CampaignDetailFragment : BaseFragment<FragmentCampaignDetailBinding>(Fragm
         }
 
         binding.btnGames.setOnClickListener {
-            navController.navigate(R.id.action_campaignDetailFragment_to_gamesFragment)
+            val action = CampaignDetailFragmentDirections.actionCampaignDetailFragmentToGamesFragment(
+                item
+            )
+            navController.navigate(action)
         }
     }
 

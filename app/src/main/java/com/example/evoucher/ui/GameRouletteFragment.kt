@@ -3,6 +3,7 @@ package com.example.evoucher.ui
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Handler
+import android.view.View
 import androidx.fragment.app.FragmentManager
 import com.example.codebaseandroidapp.base.BaseFragment
 import com.example.evoucher.R
@@ -18,9 +19,8 @@ class GameRouletteFragment : BaseFragment<FragmentRouletteBinding>(FragmentRoule
 
     private var mRunnable: Runnable? = null
     private var mHandler = Handler()
-    private var count = 0;
-    private var total = 0;
     private var currentPosition = 0;
+    private var isCanPlay = true
     var listStrings: MutableList<String> = ArrayList()
 
     override fun initObserve() {
@@ -28,31 +28,20 @@ class GameRouletteFragment : BaseFragment<FragmentRouletteBinding>(FragmentRoule
     }
 
     override fun initialize() {
-        binding.btnRotary.isEnabled = true
-        binding.btnRotary.alpha = 1f
-        binding.btnReceiveGift.isEnabled = false
-        binding.btnReceiveGift.alpha = 0.5f
+        Utils.enableButton(binding.btnReceiveGift, false)
+        Utils.enableButton(binding.btnRotary, true)
 
         setupData()
 
         binding.btnRotary.setOnClickListener{
-            count++
-            currentPosition = Utils.random(0,5)
-            binding.btnRotary.isClickable = false
-            binding.wheelView.startRoulette(currentPosition)
-            total += listStrings.get(currentPosition).toInt()
-
-            if(count == 3){
-                binding.btnRotary.isEnabled = false
-                binding.btnRotary.alpha = 0.5f
-                binding.btnReceiveGift.isEnabled = true
-                binding.btnReceiveGift.alpha = 1f
-            } else {
-                binding.btnRotary.isEnabled = true
-                binding.btnRotary.alpha = 1f
-                binding.btnReceiveGift.isEnabled = false
-                binding.btnReceiveGift.alpha = 0.5f
+            if(isCanPlay) {
+                Utils.enableButton(binding.btnReceiveGift, false)
+                Utils.enableButton(binding.btnRotary, false)
+                currentPosition = Utils.random(0, 5)
+                binding.wheelView.startRoulette(currentPosition)
+                isCanPlay = false
             }
+
         }
 
         binding.btnReceiveGift.setOnClickListener {
@@ -82,11 +71,15 @@ class GameRouletteFragment : BaseFragment<FragmentRouletteBinding>(FragmentRoule
                 if (!isSelected) {
                     return
                 }
+                Utils.enableButton(binding.btnReceiveGift, false)
+                Utils.enableButton(binding.btnRotary, false)
                 if (mRunnable == null) {
                     mRunnable = Runnable {
-                        binding.tvTotal.text = "Tổng điểm: ${total}"
-                        binding.tvCount.text = "Quay lần: ${count}"
-                        binding.btnRotary.isClickable = true
+                        Utils.enableButton(binding.btnReceiveGift, true)
+                        Utils.enableButton(binding.btnRotary, false)
+                        binding.tvResult.text = "Bạn đã nhận được quà tặng"
+                        binding.tvDes.visibility = View.VISIBLE
+                        binding.tvLink.visibility = View.VISIBLE
                     }
                 }
                 if (mHandler == null) mHandler = Handler()
@@ -124,7 +117,7 @@ class GameRouletteFragment : BaseFragment<FragmentRouletteBinding>(FragmentRoule
     private fun showNotification(title: String, des: String) {
         var notificationFragment = NotificationFragment.newInstance(title, des, object : NotificationFragment.CallBack{
             override fun close() {
-                navController.popBackStack()
+
             }
         })
         notificationFragment.show(childFragmentManager, "NotificationFragment")

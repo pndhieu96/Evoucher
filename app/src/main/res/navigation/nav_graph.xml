@@ -120,6 +120,11 @@
         android:name="com.example.evoucher.ui.GamesFragment"
         android:label="fragment_games"
         tools:layout="@layout/fragment_games" >
+        <argument
+            android:name="campaignArg"
+            app:argType="com.example.evoucher.model.Campaign"
+            app:nullable="true"
+            android:defaultValue="@null"/>
         <action
             android:id="@+id/action_gamesFragment_to_rollDiceFragment"
             app:destination="@id/rollDiceFragment" />
@@ -134,17 +139,50 @@
         android:id="@+id/rollDiceFragment"
         android:name="com.example.evoucher.ui.GameRollDiceFragment"
         android:label="fragment_roll_dice"
-        tools:layout="@layout/fragment_roll_dice" />
+        tools:layout="@layout/fragment_roll_dice" >
+        <argument
+            android:name="campaignArg"
+            app:argType="com.example.evoucher.model.Campaign"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+        <argument
+            android:name="gamesArg"
+            app:argType="com.example.evoucher.model.Game"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+    </fragment>
     <fragment
         android:id="@+id/luckyNumberFragment"
         android:name="com.example.evoucher.ui.GameLuckyNumberFragment"
         android:label="fragment_lucky_number"
-        tools:layout="@layout/fragment_lucky_number" />
+        tools:layout="@layout/fragment_lucky_number">
+        <argument
+            android:name="campaignArg"
+            app:argType="com.example.evoucher.model.Campaign"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+        <argument
+            android:name="gamesArg"
+            app:argType="com.example.evoucher.model.Game"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+    </fragment>
     <fragment
         android:id="@+id/rouletteFragment"
         android:name="com.example.evoucher.ui.GameRouletteFragment"
         android:label="fragment_roulette"
-        tools:layout="@layout/fragment_roulette" />
+        tools:layout="@layout/fragment_roulette">
+        <argument
+            android:name="campaignArg"
+            app:argType="com.example.evoucher.model.Campaign"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+        <argument
+            android:name="gamesArg"
+            app:argType="com.example.evoucher.model.Game"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+    </fragment>
     <fragment
         android:id="@+id/couponDetailFragment"
         android:name="com.example.evoucher.ui.CouponDetailFragment"

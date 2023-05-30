@@ -16,13 +16,14 @@ import com.example.evoucher.R
 import com.example.evoucher.databinding.ItemGameBinding
 import com.example.evoucher.databinding.ItemIndustryBinding
 import com.example.evoucher.databinding.ItemPartnerBinding
+import com.example.evoucher.model.Game
 import com.example.evoucher.model.Industry
 import com.example.evoucher.model.Partner
 import com.example.evoucher.utils.ConstantUtils
 import com.example.evoucher.utils.Utils
 import dagger.hilt.InstallIn
 
-class GamesAdapter(var list : List<String>) :
+class GamesAdapter(var list : List<Game>) :
     RecyclerView.Adapter<GamesAdapter.ViewHolder>() {
     lateinit var context: Context
     var callBack : CallBack? = null
@@ -34,14 +35,8 @@ class GamesAdapter(var list : List<String>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var item = list[position]
-        var binding = holder.binding
-        var imgResource : Int = R.drawable.ic_roulette
-        if(position == 0) {
-            imgResource = R.drawable.ic_lucky_number
-        } else if(position == 1) {
-            imgResource = R.drawable.ic_roll_dice
-        }
+        val item = list[position]
+        val binding = holder.binding
         val options: RequestOptions = RequestOptions()
             .centerCrop()
             .placeholder(R.drawable.logo)
@@ -50,20 +45,20 @@ class GamesAdapter(var list : List<String>) :
             .priority(Priority.HIGH)
             .transforms(CenterCrop(), RoundedCorners(20))
         Glide.with(context)
-            .load(imgResource)
+            .load(Utils.getImageUrl(item.imgUrl, ConstantUtils.TYPE_IMAGE_GAMES))
             .apply(options)
             .into(binding.ivAvatar)
-        binding.tvName.text = item
-        binding.tvMoTa.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        binding.tvName.text = item.ten
+        binding.tvMoTa.text = item.luatChoi
         binding.llContainer.setOnClickListener {
-            callBack?.onClick(position)
+            callBack?.onClick(item)
         }
     }
 
     override fun getItemCount(): Int = list.count()
 
     interface CallBack {
-        fun onClick(item: Int)
+        fun onClick(item: Game)
     }
 
     class ViewHolder(var binding: ItemGameBinding) : RecyclerView.ViewHolder(binding.root){}

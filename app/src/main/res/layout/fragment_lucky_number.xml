@@ -35,41 +35,16 @@
                 android:text="\?\?"
                 android:gravity="center"
                 android:background="@drawable/bg_lucky"/>
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_result"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-                <TextView
-                    android:id="@+id/tv_number_1"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:layout_marginHorizontal="15dp"
-                    android:gravity="center_horizontal"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-                    android:text="\?"/>
-                <TextView
-                    android:id="@+id/tv_number_2"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:layout_marginHorizontal="15dp"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:gravity="center_horizontal"
-                    android:text="\?"/>
-                <TextView
-                    android:id="@+id/tv_number_3"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:layout_marginHorizontal="15dp"
-                    android:gravity="center_horizontal"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-                    android:text="\?"/>
-            </LinearLayout>
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="15dp"
+                android:gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                tools:text="Chúc bạn may mắn lần sau"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_take_number"
                 android:layout_width="wrap_content"
@@ -93,15 +68,28 @@
                 android:height="50dp"
                 android:textColor="@color/white"
                 android:foreground="?attr/selectableItemBackground"
-                android:text="Nhận quả"/>
+                android:text="Chi tiết quà tặng"/>
             <TextView
+                android:id="@+id/tv_des"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:layout_marginTop="30dp"
                 android:textSize="18dp"
                 android:gravity="center_horizontal"
-                android:text="Luật chơi: Lấy 3 con số may mắn của bạn và nhận coupon để được giảm giá tại các chi nhánh đối tác"/>
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:text="Kết quả được quy đổi trên dữ liệu lấy từ hệ thống blockchain nhấn đường dẫn phía dưới để đối soát:"/>
+            <TextView
+                android:id="@+id/tv_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue_800"
+                android:textSize="18dp"
+                android:gravity="center_horizontal"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="www.abc.com"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

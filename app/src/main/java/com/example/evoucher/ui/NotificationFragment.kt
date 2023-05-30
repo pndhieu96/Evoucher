@@ -30,6 +30,7 @@ class NotificationFragment : DialogFragment() {
         binding.tvTitle.text = title
         binding.tvDes.text = des
         binding.btnClose.setOnClickListener {
+            this.dismiss()
             callBack?.close()
         }
 

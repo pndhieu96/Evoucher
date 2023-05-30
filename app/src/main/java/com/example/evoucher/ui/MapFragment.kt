@@ -4,24 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.evoucher.R
 import com.example.evoucher.databinding.FragmentMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+import kotlin.collections.HashMap
 
 
 @AndroidEntryPoint
 class MapFragment : Fragment() {
     private var mMap: GoogleMap? = null
     private lateinit var binding: FragmentMapBinding
+    private val mHashMap = HashMap<String, String>()
 
     companion object {
         @JvmStatic
@@ -69,7 +71,14 @@ class MapFragment : Fragment() {
             setCustomMarker(LatLng(10.804762546208464, 106.71679215139723))
 
             mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 16f))
+            mMap?.setOnMarkerClickListener(onMarkerClick)
+        }
+    }
 
+    private var onMarkerClick = object : OnMarkerClickListener{
+        override fun onMarkerClick(marker: Marker): Boolean {
+//            Toast.makeText(context, mHashMap.get(marker.id).toString(), Toast.LENGTH_LONG).show()
+            return false
         }
     }
 
@@ -77,11 +86,17 @@ class MapFragment : Fragment() {
         val blackMarkerIcon : BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_store)
         val markerOptions : MarkerOptions = MarkerOptions().position(latLng)
             .title("Bibica")
-            .snippet("15 Xo viet nghe tinh, Binh Thanh, TPHCM")
+            .snippet("18 Ung Van Khiem")
             .icon(blackMarkerIcon)
-        mMap?.addMarker(markerOptions)
+        val marker = mMap?.addMarker(markerOptions)
         mMap?.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+
+        marker?.id?.let {
+            mHashMap.put(it, UUID.randomUUID().toString())
+        }
     }
+
+
 
     override fun onResume() {
         super.onResume()

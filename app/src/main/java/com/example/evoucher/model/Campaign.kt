@@ -3,15 +3,7 @@ package com.example.evoucher.model
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
-
-data class CampaignsApiResult (
-    @SerializedName("status_code"    ) var statusCode    : Int?     = null,
-    @SerializedName("errorMessages" ) var statusMessage : ArrayList<String> = arrayListOf(),
-    @SerializedName("isSuccess"        ) var success       : Boolean = false,
-    @SerializedName("result"        ) var result        : List<Campaign>           = arrayListOf(),
-)
 
 data class Campaign (
     @SerializedName("id"          ) var id          : Int?    = null,

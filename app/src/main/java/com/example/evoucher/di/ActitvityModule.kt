@@ -45,10 +45,9 @@ class ActitvityRetainedModule {
             if(!token.isEmpty()) {
                 request.addHeader("Authorization", "bearer $token")
             }
-            request.addHeader("Content-type", "application/json")
             val actualRequest = request.build()
             val response = it.proceed(actualRequest)
-            if(response.code == 401) {
+            if(response.code == 401 || response.code == 400) {
                 sharedPreferencesImp.putString(TOKEN, "")
                 Utils.reload(appContext)
             }

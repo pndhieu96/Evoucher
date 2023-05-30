@@ -3,6 +3,7 @@ package com.example.evoucher.ui
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.view.View
+import android.view.View.VISIBLE
 import androidx.core.content.ContextCompat.getSystemService
 import com.example.codebaseandroidapp.base.BaseFragment
 import com.example.evoucher.R
@@ -17,8 +18,7 @@ class GameRollDiceFragment : BaseFragment<FragmentRollDiceBinding>(FragmentRollD
 
     private var delayTime = 80
     private var rollAnimations = 10
-    private var count = 0
-    private var total = 0
+    private var isCanPlay = true
 
     private var mSensorManager: SensorManager? = null
     private var mAccelerometer: Sensor? = null
@@ -46,15 +46,15 @@ class GameRollDiceFragment : BaseFragment<FragmentRollDiceBinding>(FragmentRollD
         mShakeDetector = ShakeDetector()
         mShakeDetector?.setOnShakeListener{ countShake ->
             uiScope.launch {
-                if (count != 3) rollDice()
+                if(isCanPlay) rollDice()
             }
         }
 
-        binding.btnReceiveGift.isEnabled = false
-        binding.btnReceiveGift.alpha = 0.39f
+        Utils.enableButton(binding.btnReceiveGift, false)
+
         binding.diceContainer.setOnClickListener(View.OnClickListener {
             uiScope.launch {
-                if(count != 3) rollDice()
+                if(isCanPlay) rollDice()
             }
         })
 
@@ -74,7 +74,8 @@ class GameRollDiceFragment : BaseFragment<FragmentRollDiceBinding>(FragmentRollD
     }
 
     private suspend fun rollDice() {
-        count ++
+        isCanPlay = false
+
         for (i in 0 until rollAnimations) {
             val dice1: Int = Utils.random(1,6)
             val dice2: Int = Utils.random(1,6)
@@ -93,21 +94,19 @@ class GameRollDiceFragment : BaseFragment<FragmentRollDiceBinding>(FragmentRollD
             || score2 < 1 || score2 > 6
             || (score1 + score2 != score))
 
-        total += score
         binding.die1.setImageResource(diceImages[score1 - 1])
         binding.die2.setImageResource(diceImages[score2 - 1])
-        binding.tvTotal.text = "Tổng điểm: ${total}"
-        binding.tvCount.text = "Số lần: ${count}"
-        if(count == 3) {
-            binding.btnReceiveGift.isEnabled = true
-            binding.btnReceiveGift.alpha = 1f
-        }
+
+        Utils.enableButton(binding.btnReceiveGift, true)
+
+        binding.tvResult.text = "Bạn đã nhận được quà tặng"
+        binding.tvDes.visibility = VISIBLE
+        binding.tvLink.visibility = VISIBLE
     }
 
     private fun showNotification(title: String, des: String) {
         var notificationFragment = NotificationFragment.newInstance(title, des, object : NotificationFragment.CallBack{
             override fun close() {
-                navController.popBackStack()
             }
         })
         notificationFragment.show(childFragmentManager, "NotificationFragment")

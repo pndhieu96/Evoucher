@@ -3,21 +3,12 @@ package com.example.evoucher.model
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 import java.util.*
-import kotlin.collections.ArrayList
-
-
-data class UserApiResult (
-    @SerializedName("status_code"    ) var statusCode    : Int?     = null,
-    @SerializedName("errorMessages" ) var statusMessage : ArrayList<String> = arrayListOf(),
-    @SerializedName("isSuccess"        ) var success       : Boolean = false,
-    @SerializedName("result"        ) var result        : UserResult?           = null,
-)
 
 data class UserResult (
 
     @SerializedName("user"     ) var user     : User?     = User(),
     @SerializedName("moreInfo" ) var moreInfo : MoreInfo? = MoreInfo(),
-    @SerializedName("token"    ) var token    : String?   = null
+    @SerializedName("token"    ) var token    : String   = ""
 ) : Serializable
 
 class User (

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.evoucher.model.*
 import com.example.evoucher.network.NetWorkService
+import com.example.evoucher.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -24,7 +25,7 @@ class LoginVM @Inject constructor(
         viewModelScope.launch {
             var jsonObject = JSONObject()
             jsonObject.put("userName", user)
-            jsonObject.put("password", pass)
+            jsonObject.put("password", Utils.convertToMD5(pass))
             val resourceLogin = netWorkService.login(jsonObject.toString())
             if(resourceLogin.status == ResourceStatus.SUCCESS) {
                 var mUserResult =  Resource.Success(data = resourceLogin.data?.result)

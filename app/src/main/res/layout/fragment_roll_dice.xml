@@ -42,30 +42,17 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_count"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_result"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/wheel_view"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
-        android:text="Quay lần: 0"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_below="@id/wheel_view"
         android:textColor="@color/black"
-        android:textSize="18dp"
-        android:layout_gravity="center_horizontal"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_total"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/tv_count"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
-        android:text="Tổng điểm: 0"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        android:textStyle="bold" />
+        tools:text="Chúc bạn may mắn lần sau"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_receive_gift"
@@ -79,17 +66,30 @@
         android:height="50dp"
         android:background="@drawable/btn_roll_dice_bg"
         android:foreground="?attr/selectableItemBackground"
-        android:text="Nhận quà"
+        android:text="Chi tiết quà tặng"
         android:textStyle="bold"
         android:textColor="@color/black" />
+
     <TextView
-        android:id="@+id/tv_des_rotary"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_des"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textSize="18dp"
         android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/btn_rotary"
-        android:layout_centerInParent="true"
-        android:text="Lắc 3 lần để nhận coupon"
-        android:textStyle="bold"
-        android:textColor="@color/black" />
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:text="Kết quả được quy đổi trên dữ liệu lấy từ hệ thống blockchain nhấn đường dẫn sau để đối soát:"/>
+    <TextView
+        android:id="@+id/tv_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:text="www.abc.com"/>
 </LinearLayout>

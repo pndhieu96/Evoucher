@@ -7,13 +7,18 @@ import android.content.pm.PackageManager
 import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import com.example.evoucher.model.ApiError
 import com.example.evoucher.model.Resource
 import com.example.evoucher.model.ResourceStatus
+import com.example.evoucher.utils.ConstantUtils.Companion.TYPE_IMAGE_BRANCH
 import com.example.evoucher.utils.ConstantUtils.Companion.TYPE_IMAGE_CAMPAIGN
+import com.example.evoucher.utils.ConstantUtils.Companion.TYPE_IMAGE_GAMES
 import com.example.evoucher.utils.ConstantUtils.Companion.TYPE_IMAGE_PARTNER
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 import java.text.Normalizer
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -81,9 +86,12 @@ class Utils {
                 return "https://ptc3.ngoinhaso.vn/images/AnhChienDich/$name";
             } else if(type == TYPE_IMAGE_PARTNER) {
                 return "https://ptc3.ngoinhaso.vn/images/LogoDoiTac/$name";
-            } else {
+            } else if(type == TYPE_IMAGE_BRANCH){
                 return "https://ptc3.ngoinhaso.vn/images/AnhChiNhanh/$name";
+            } else if(type == TYPE_IMAGE_GAMES){
+                return "https://ptc3.ngoinhaso.vn/images/AnhTroChoi/$name";
             }
+            return ""
         }
 
         fun stringToDate(dateStr: String) : Date {
@@ -99,5 +107,38 @@ class Utils {
         fun String.removeNonSpacingMarks() =
             Normalizer.normalize(this, Normalizer.Form.NFD)
                 .replace("\\p{Mn}+".toRegex(), "")
+
+        fun convertToMD5(input: String): String {
+            try {
+                // Create MD5 Hash
+                val digest: MessageDigest = MessageDigest.getInstance("MD5")
+                digest.update(input.toByteArray())
+                val messageDigest: ByteArray = digest.digest()
+
+                // Create Hex String
+                val hexString = StringBuilder()
+                for (b in messageDigest) {
+                    val hex = Integer.toHexString(0xFF and b.toInt())
+                    if (hex.length == 1) {
+                        hexString.append("0")
+                    }
+                    hexString.append(hex)
+                }
+                return hexString.toString()
+            } catch (e: NoSuchAlgorithmException) {
+                e.printStackTrace()
+            }
+            return ""
+        }
+
+        fun enableButton(btn : Button, enable: Boolean) {
+            if(enable) {
+                btn.isEnabled = true
+                btn.alpha = 1f
+            } else {
+                btn.isEnabled = false
+                btn.alpha = 0.5f
+            }
+        }
     }
 }

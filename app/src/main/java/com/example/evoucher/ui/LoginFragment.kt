@@ -11,6 +11,7 @@ import com.example.codebaseandroidapp.base.BaseFragment
 import com.example.evoucher.R
 import com.example.evoucher.customView.CustomToast
 import com.example.evoucher.databinding.FragmentLoginBinding
+import com.example.evoucher.model.Campaign
 import com.example.evoucher.model.UserResult
 import com.example.evoucher.utils.SharedPreferencesImp
 import com.example.evoucher.utils.Utils
@@ -25,10 +26,9 @@ import javax.inject.Inject
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
     private val LoginVM : LoginVM by viewModels()
-
     @Inject
     lateinit var sPregerences: SharedPreferencesImp
-
+    private var pass : String = ""
     override fun initObserve() {
         LoginVM.userResult.observer(
             viewLifecycleOwner,
@@ -39,6 +39,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 sPregerences.putBoolean(SharedPreferencesImp.IS_SAVE_ACCOUNT,
                     binding.cbSaveAccount.isChecked
                 )
+                it.user?.password = pass
                 sPregerences.putString(
                     SharedPreferencesImp.USER_INFO,
                     Gson().toJson(it)
@@ -73,9 +74,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
 
         binding.btnLogin.setOnClickListener {
+            pass = binding.edtPassword.text.toString()
             LoginVM.login(
                 binding.edtAccount.text.toString(),
-                binding.edtPassword.text.toString()
+                pass
             )
             Utils.hideKeyboard(requireActivity())
         }
