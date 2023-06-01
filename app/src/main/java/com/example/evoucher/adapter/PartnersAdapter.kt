@@ -28,7 +28,7 @@ class PartnersAdapter(var list : List<Partner>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
         val inflate = LayoutInflater.from(context)
-        return  ViewHolder(ItemPartnerBinding.inflate(inflate))
+        return  ViewHolder(ItemPartnerBinding.inflate(inflate, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

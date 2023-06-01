@@ -15,7 +15,7 @@ class IndustriesAdapter(var list : List<Industry>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflate = LayoutInflater.from(parent.context)
-        return  ViewHolder(ItemIndustryBinding.inflate(inflate))
+        return  ViewHolder(ItemIndustryBinding.inflate(inflate, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

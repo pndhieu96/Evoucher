@@ -31,7 +31,7 @@ class GamesAdapter(var list : List<Game>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
         val inflate = LayoutInflater.from(context)
-        return  ViewHolder(ItemGameBinding.inflate(inflate))
+        return  ViewHolder(ItemGameBinding.inflate(inflate, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

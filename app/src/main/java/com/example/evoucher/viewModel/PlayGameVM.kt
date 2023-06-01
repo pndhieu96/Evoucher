@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.evoucher.model.CouponType
 import com.example.evoucher.model.GameResult
 import com.example.evoucher.model.Resource
 import com.example.evoucher.model.ResourceStatus
@@ -20,6 +21,10 @@ class PlayGameVM @Inject constructor(val netWorkService: NetWorkService) : ViewM
     private val _games = MutableLiveData<Resource<GameResult>>()
     val games: LiveData<Resource<GameResult>>
         get() = _games
+
+    private val _coupon = MutableLiveData<Resource<CouponType>>()
+    val coupon: LiveData<Resource<CouponType>>
+        get() = _coupon
 
     fun playGames(userId: Int, token: String, min: Int, max: Int,
                   trochoiId: Int, chiendichId: Int, xxx: Boolean) {
@@ -51,7 +56,17 @@ class PlayGameVM @Inject constructor(val netWorkService: NetWorkService) : ViewM
         }
     }
 
-    fun getCouponType(){
+    fun getCouponType(id: String){
+        _coupon.value = Resource.Loading()
 
+        viewModelScope.launch {
+            val resource = netWorkService.getCouponType(id)
+            if(resource.status == ResourceStatus.SUCCESS) {
+                var couponResource = Resource.Success(data = resource.data?.result)
+                _coupon.value = couponResource
+            } else {
+                _coupon.value = Resource.Error(resource.error!!)
+            }
+        }
     }
 }

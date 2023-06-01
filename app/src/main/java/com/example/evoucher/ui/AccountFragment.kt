@@ -51,7 +51,6 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
             Glide.with(requireContext())
                 .load(Utils.getImageUrl(userInfo.moreInfo?.imgUrl ?: "", ConstantUtils.TYPE_IMAGE_PARTNER))
                 .apply(RequestOptions().placeholder(R.drawable.ic_user)
-                    .error(R.drawable.ic_user)
                     .centerCrop())
                 .into(binding.ivAvatar)
         }

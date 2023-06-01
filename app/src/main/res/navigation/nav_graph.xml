@@ -125,6 +125,11 @@
             app:argType="com.example.evoucher.model.Campaign"
             app:nullable="true"
             android:defaultValue="@null"/>
+        <argument
+            android:name="partnerArg"
+            app:argType="com.example.evoucher.model.Partner"
+            app:nullable="true"
+            android:defaultValue="@null"/>
         <action
             android:id="@+id/action_gamesFragment_to_rollDiceFragment"
             app:destination="@id/rollDiceFragment" />
@@ -150,6 +155,14 @@
             app:argType="com.example.evoucher.model.Game"
             app:nullable="true"
             android:defaultValue="@null"/>
+        <argument
+            android:name="partnerArg"
+            app:argType="com.example.evoucher.model.Partner"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+        <action
+            android:id="@+id/action_rollDiceFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/luckyNumberFragment"
@@ -166,6 +179,14 @@
             app:argType="com.example.evoucher.model.Game"
             app:nullable="true"
             android:defaultValue="@null"/>
+        <argument
+            android:name="partnerArg"
+            app:argType="com.example.evoucher.model.Partner"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+        <action
+            android:id="@+id/action_luckyNumberFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/rouletteFragment"
@@ -182,10 +203,27 @@
             app:argType="com.example.evoucher.model.Game"
             app:nullable="true"
             android:defaultValue="@null"/>
+        <argument
+            android:name="partnerArg"
+            app:argType="com.example.evoucher.model.Partner"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+        <action
+            android:id="@+id/action_rouletteFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/couponDetailFragment"
         android:name="com.example.evoucher.ui.CouponDetailFragment"
         android:label="fragment_coupon_detail"
         tools:layout="@layout/fragment_coupon_detail" />
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.example.evoucher.ui.WebViewFragment"
+        android:label="WebViewFragment" >
+        <argument
+            android:name="urlArg"
+            app:argType="string"
+            android:defaultValue=""/>
+    </fragment>
 </navigation>

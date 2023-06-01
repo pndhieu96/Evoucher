@@ -27,7 +27,7 @@ class CampaignAdapter(var list : List<Campaign>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
         val inflate = LayoutInflater.from(context)
-        return ViewHolder(ItemCampaignBinding.inflate(inflate))
+        return ViewHolder(ItemCampaignBinding.inflate(inflate, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

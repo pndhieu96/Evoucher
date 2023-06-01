@@ -11,5 +11,7 @@ class ConstantUtils {
         const val TYPE_GAME_LUCKY_NUMBER = 1;
         const val TYPE_GAME_ROLL_DICE = 2;
         const val TYPE_GAME_ROULETTE = 3;
+
+        const val XXX = false;
     }
 }

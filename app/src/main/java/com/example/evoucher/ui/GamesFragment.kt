@@ -1,29 +1,20 @@
 package com.example.evoucher.ui
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavAction
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.navArgs
 import com.example.codebaseandroidapp.base.BaseFragment
-import com.example.evoucher.R
 import com.example.evoucher.adapter.GamesAdapter
-import com.example.evoucher.adapter.SearchAdapter
 import com.example.evoucher.customView.CustomToast
 import com.example.evoucher.customView.TopBar
 import com.example.evoucher.databinding.FragmentGamesBinding
-import com.example.evoucher.model.Campaign
 import com.example.evoucher.model.Game
 import com.example.evoucher.utils.ConstantUtils.Companion.TYPE_GAME_LUCKY_NUMBER
 import com.example.evoucher.utils.ConstantUtils.Companion.TYPE_GAME_ROLL_DICE
 import com.example.evoucher.utils.ConstantUtils.Companion.TYPE_GAME_ROULETTE
 import com.example.evoucher.utils.Utils.Companion.observer
 import com.example.evoucher.viewModel.GamesVM
-import com.example.evoucher.viewModel.LoginVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -55,6 +46,7 @@ class GamesFragment : BaseFragment<FragmentGamesBinding>(FragmentGamesBinding::i
 
     override fun initialize() {
         val campaign = args.campaignArg
+        val partner = args.partnerArg
         vm.getGames()
         binding.tb.setTitle("Danh sách trò chơi")
         binding.tb.callBack = object : TopBar.CallBack {
@@ -73,17 +65,20 @@ class GamesFragment : BaseFragment<FragmentGamesBinding>(FragmentGamesBinding::i
                 if(item.id == TYPE_GAME_LUCKY_NUMBER) {
                     action = GamesFragmentDirections.actionGamesFragmentToLuckyNumberFragment(
                         campaign,
-                        item
+                        item,
+                        partner
                     )
                 } else if(item.id == TYPE_GAME_ROLL_DICE) {
                     action = GamesFragmentDirections.actionGamesFragmentToRollDiceFragment(
                         campaign,
-                        item
+                        item,
+                        partner
                     )
                 } else if(item.id == TYPE_GAME_ROULETTE) {
                     action = GamesFragmentDirections.actionGamesFragmentToRouletteFragment(
                         campaign,
-                        item
+                        item,
+                        partner
                     )
                 }
                 action?.let {

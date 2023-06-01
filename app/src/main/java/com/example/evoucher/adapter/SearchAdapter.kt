@@ -28,7 +28,7 @@ class SearchAdapter(var list : List<Campaign>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
         val inflate = LayoutInflater.from(context)
-        return ViewHolder(ItemSearchBinding.inflate(inflate))
+        return ViewHolder(ItemSearchBinding.inflate(inflate, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

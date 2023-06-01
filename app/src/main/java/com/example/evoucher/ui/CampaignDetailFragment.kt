@@ -35,6 +35,7 @@ class CampaignDetailFragment : BaseFragment<FragmentCampaignDetailBinding>(Fragm
     lateinit var sPregerences: SharedPreferencesImp
     private val args: CampaignDetailFragmentArgs by navArgs()
     private var parners : Partners = Partners()
+    private var partner : Partner = Partner()
 
     override fun initObserve() {
 
@@ -61,6 +62,7 @@ class CampaignDetailFragment : BaseFragment<FragmentCampaignDetailBinding>(Fragm
                 parners.result = parners.result?.filter {
                     it.id == item.chiNhanh?.doiTacId
                 }
+                partner = parners.result?.get(0)!!
             } catch (_: Exception){}
 
             try {
@@ -95,7 +97,8 @@ class CampaignDetailFragment : BaseFragment<FragmentCampaignDetailBinding>(Fragm
 
         binding.btnGames.setOnClickListener {
             val action = CampaignDetailFragmentDirections.actionCampaignDetailFragmentToGamesFragment(
-                item
+                item,
+                partner
             )
             navController.navigate(action)
         }
