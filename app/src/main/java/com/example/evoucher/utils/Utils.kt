@@ -104,6 +104,13 @@ class Utils {
             }
         }
 
+        fun Date.plus(days: Int): Date {
+            val calendar = Calendar.getInstance()
+            calendar.time = this
+            calendar.add(Calendar.DAY_OF_YEAR, days)
+            return calendar.time
+        }
+
         fun String.removeNonSpacingMarks() =
             Normalizer.normalize(this, Normalizer.Form.NFD)
                 .replace("\\p{Mn}+".toRegex(), "")

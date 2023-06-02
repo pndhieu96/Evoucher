@@ -3,11 +3,18 @@ package com.example.evoucher.ui
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.example.codebaseandroidapp.base.BaseFragment
 import com.example.evoucher.R
 import com.example.evoucher.databinding.FragmentMapBinding
+import com.example.evoucher.model.ChiNhanh
+import com.example.evoucher.utils.Utils.Companion.observer
+import com.example.evoucher.viewModel.MapVm
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
@@ -20,27 +27,37 @@ import kotlin.collections.HashMap
 
 
 @AndroidEntryPoint
-class MapFragment : Fragment() {
+class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate) {
     private var mMap: GoogleMap? = null
-    private lateinit var binding: FragmentMapBinding
     private val mHashMap = HashMap<String, String>()
+    private val mapVm: MapVm by viewModels()
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = MapFragment()
+    val myLocation = LatLng(10.807235853076694, 106.7189197947759)
+
+    override fun initObserve() {
+        mapVm.branch.observer(
+            viewLifecycleOwner,
+            onSuccess = {
+                binding.pbLoading.visibility = GONE
+                it.forEach {
+                    if(!it.kinhDo.isEmpty() && !it.viDo.isEmpty()) {
+                        setCustomMarker(it)
+                    }
+                }
+                mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 16f))
+                mMap?.setOnMarkerClickListener(onMarkerClick)
+            },
+            onLoading = {
+                binding.pbLoading.visibility = VISIBLE
+            },
+            onError = {
+                binding.pbLoading.visibility = GONE
+            }
+        )
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentMapBinding.inflate(inflater)
-        binding.mapView.onCreate(savedInstanceState)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun initialize() {
+        binding.mapView.onCreate(null)
         binding.mapView.onResume()
         try {
             MapsInitializer.initialize(requireContext().applicationContext)
@@ -53,25 +70,12 @@ class MapFragment : Fragment() {
     private var mapCallBack = object : OnMapReadyCallback{
         override fun onMapReady(googleMap: GoogleMap) {
             mMap = googleMap
-
-            // Add a marker in Sydney and move the camera
-
-            // Add a marker in Sydney and move the camera
-            val myLocation = LatLng(10.807235853076694, 106.7189197947759)
             mMap?.addMarker(
                 MarkerOptions()
                     .position(myLocation)
-                    .title("Vi tri cua ban")
+                    .title("Vị trí của bạn")
             )
-
-            setCustomMarker(LatLng(10.808421307800092, 106.71689693822319))
-            setCustomMarker(LatLng(10.80701321220181, 106.71835734016057))
-            setCustomMarker(LatLng(10.806608383494693, 106.72035531336324))
-            setCustomMarker(LatLng(10.806581407550953, 106.71600479241356))
-            setCustomMarker(LatLng(10.804762546208464, 106.71679215139723))
-
-            mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 16f))
-            mMap?.setOnMarkerClickListener(onMarkerClick)
+            mapVm.getBranch()
         }
     }
 
@@ -82,11 +86,12 @@ class MapFragment : Fragment() {
         }
     }
 
-    fun setCustomMarker(latLng: LatLng) {
+    fun setCustomMarker(chiNhanh: ChiNhanh) {
+        val latLng = LatLng(chiNhanh.kinhDo.toDouble(), chiNhanh.viDo.toDouble())
         val blackMarkerIcon : BitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_store)
         val markerOptions : MarkerOptions = MarkerOptions().position(latLng)
-            .title("Bibica")
-            .snippet("18 Ung Van Khiem")
+            .title(chiNhanh.ten)
+            .snippet(chiNhanh.diaChi)
             .icon(blackMarkerIcon)
         val marker = mMap?.addMarker(markerOptions)
         mMap?.moveCamera(CameraUpdateFactory.newLatLng(latLng))
@@ -96,7 +101,10 @@ class MapFragment : Fragment() {
         }
     }
 
-
+    companion object {
+        @JvmStatic
+        fun newInstance() = MapFragment()
+    }
 
     override fun onResume() {
         super.onResume()

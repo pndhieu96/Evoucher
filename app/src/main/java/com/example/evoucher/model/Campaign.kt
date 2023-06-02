@@ -71,6 +71,8 @@ data class ChiNhanh (
     @SerializedName("mota"        ) var mota        : String? = null,
     @SerializedName("imgUrl"      ) var imgUrl      : String? = null,
     @SerializedName("nganhHangId" ) var nganhHangId : Int?    = null,
-    @SerializedName("nganhHang"   ) var nganhHang   : String? = null
+    @SerializedName("nganhHang"   ) var nganhHang   : String? = null,
+    @SerializedName("kinhDo"   ) var kinhDo   : String = "",
+    @SerializedName("viDo"   ) var viDo   : String = ""
 
 )

@@ -115,7 +115,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
@@ -129,12 +129,13 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/screen_horizontal"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="-20dp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/screen_horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 android:visibility="gone"
+                tools:visibility="visible"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="@id/iv_bg"
                 app:layout_constraintEnd_toEndOf="parent"

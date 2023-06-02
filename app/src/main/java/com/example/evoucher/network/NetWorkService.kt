@@ -39,6 +39,14 @@ class NetWorkService @Inject constructor(
         return safeApiCall { apiService?.getPartners()!! }
     }
 
+    suspend fun getCoupon() : Resource<ApiResult<List<CouponResult>>> {
+        return safeApiCall { apiService?.getCoupon()!! }
+    }
+
+    suspend fun getBranch() : Resource<ApiResult<List<ChiNhanh>>> {
+        return safeApiCall { apiService?.getBranch()!! }
+    }
+
     suspend fun getCouponType(id: String) : Resource<ApiResult<CouponType>> {
         return safeApiCall { apiService?.getCouponType(id)!! }
     }
@@ -68,6 +76,12 @@ interface ApiService {
 
     @GET("LoaiCoupon/GetLoaiCoupon/{id}")
     suspend fun getCouponType(@Path("id") id : String) : Response<ApiResult<CouponType>>
+
+    @GET("coupon/GetAllDetailed")
+    suspend fun getCoupon() : Response<ApiResult<List<CouponResult>>>
+
+    @GET("ChiNhanh/GetAllChiNhanh")
+    suspend fun getBranch() : Response<ApiResult<List<ChiNhanh>>>
 
     @GET("TroChoi/GetAllTroChoi")
     suspend fun getGames() : Response<ApiResult<List<Game>>>

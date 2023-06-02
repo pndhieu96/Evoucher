@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/bg_voucher"
         android:orientation="horizontal">
         <TextView
@@ -19,6 +19,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:background="@drawable/bg_text_voucher_right"
+            android:rotation="270"
             android:text="Coupon"/>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -38,13 +39,14 @@
                     android:textColor="@color/black"
                     android:text="Gỉảm giá" />
                 <TextView
+                    android:id="@+id/tv_percent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     android:textSize="25dp"
-                    android:text="20%"/>
+                    tools:text="20%"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -59,12 +61,13 @@
                     android:textSize="16dp"
                     android:text="Tại"/>
                 <TextView
+                    android:id="@+id/tv_industry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:maxLines="2"
                     android:textSize="16dp"
-                    android:text="Cửa hàng bánh kẹo abc abc abc abc "/>
+                    tools:text="Cửa hàng bánh kẹo abc abc abc abc "/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
