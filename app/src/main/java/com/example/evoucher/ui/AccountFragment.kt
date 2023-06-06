@@ -79,12 +79,11 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
         adapter = CouponsAdapter(listOf())
         binding.rv.adapter = adapter
         adapter.callBack = object : CouponsAdapter.CallBack {
-
             override fun onClick(item: CouponResult) {
-
+                val action = AccountFragmentDirections.actionAccountFragmentToCouponDetailFragment(item)
+                navController.navigate(action)
             }
         }
-
 
         userInfo?.let { userInfo ->
             vm.getCoupon(userInfo.user?.id ?: 0)

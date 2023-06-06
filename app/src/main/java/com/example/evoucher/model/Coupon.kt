@@ -1,5 +1,7 @@
 package com.example.evoucher.model
 
+import java.io.Serializable
+
 data class Coupon(
     val id: Int,
     val trangThai: Int,
@@ -20,4 +22,4 @@ data class CouponResult(
     val chiNhanh_Ten: String,
     val chiNhanh_DiaChi: String,
     val chiNhanhId: Int
-)
+) : Serializable

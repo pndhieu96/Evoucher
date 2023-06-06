@@ -216,7 +216,13 @@
         android:id="@+id/couponDetailFragment"
         android:name="com.example.evoucher.ui.CouponDetailFragment"
         android:label="fragment_coupon_detail"
-        tools:layout="@layout/fragment_coupon_detail" />
+        tools:layout="@layout/fragment_coupon_detail">
+        <argument
+            android:name="couponResultArg"
+            app:argType="com.example.evoucher.model.CouponResult"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+    </fragment>
     <fragment
         android:id="@+id/webViewFragment"
         android:name="com.example.evoucher.ui.WebViewFragment"
