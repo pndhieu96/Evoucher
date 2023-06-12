@@ -40,7 +40,7 @@ class GameRollDiceFragment : BaseFragment<FragmentRollDiceBinding>(FragmentRollD
     private var isCanPlay = true
 
     private var delayTime = 100
-    private var minLoadingTime = 500
+    private var minLoadingTime = 800
 
     private var mSensorManager: SensorManager? = null
     private var mAccelerometer: Sensor? = null
