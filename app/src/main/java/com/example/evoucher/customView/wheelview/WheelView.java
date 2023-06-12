@@ -1045,6 +1045,7 @@ public class WheelView extends View {
         return Circle.clamp(adapterPosition + circularOffset, mItemCount);
     }
 
+    int count = 0;
     /**
      * Estimates the wheel's new angle and angular velocity
      */
@@ -1069,11 +1070,17 @@ public class WheelView extends View {
             int selectedPosition = getSelectedPosition();
             if (selectedPosition == myPosition
                     || myPosition < 0 || myPosition >= mAdapterItemCount) {
-                mRequiresUpdate = false;
-                //Finish rotate roulette
-                mOnItemClickListener.onWheelItemClick(this, selectedPosition, true);
-            } else {
-                addAngle(SPEED_INERTIA * mAngularVelocity * deltaTime);
+                count++;
+                if(count == 2) {
+                    mRequiresUpdate = false;
+                    //Finish rotate roulette
+                    mOnItemClickListener.onWheelItemClick(this, selectedPosition, true);
+                } else {
+                    addAngle(SPEED_INERTIA * mAngularVelocity * deltaTime);
+                }
+            }
+            else {
+                addAngle(mSpeed * mAngularVelocity * deltaTime);
             }
         }
     }
