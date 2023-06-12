@@ -34,6 +34,7 @@ abstract class BaseRepo {
                 listStatus.add("Please check your network connection")
                 Resource.Error(ApiError(statusMessage = listStatus))
             } catch (e: Exception) {
+                var ex = e
                 var listStatus = ArrayList<String>()
                 listStatus.add("Something went wrong")
                 Resource.Error(ApiError(statusMessage = listStatus))

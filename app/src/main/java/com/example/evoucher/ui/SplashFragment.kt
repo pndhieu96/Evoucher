@@ -34,7 +34,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
             } else {
                 navController.navigate(R.id.action_splashFragment_to_homeFragment)
             }
-        },2000)
+        },1000)
     }
 
     companion object {

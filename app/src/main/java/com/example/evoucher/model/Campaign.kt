@@ -65,7 +65,7 @@ data class ChiNhanh (
 
     @SerializedName("id"          ) var id          : Int?    = null,
     @SerializedName("doiTacId"    ) var doiTacId    : Int?    = null,
-    @SerializedName("doiTac"      ) var doiTac      : String? = null,
+    @SerializedName("doiTac"      ) var doiTac      : Partner? = null,
     @SerializedName("ten"         ) var ten         : String? = null,
     @SerializedName("diaChi"      ) var diaChi      : String? = null,
     @SerializedName("mota"        ) var mota        : String? = null,
@@ -74,5 +74,4 @@ data class ChiNhanh (
     @SerializedName("nganhHang"   ) var nganhHang   : String? = null,
     @SerializedName("kinhDo"   ) var kinhDo   : String = "",
     @SerializedName("viDo"   ) var viDo   : String = ""
-
 )

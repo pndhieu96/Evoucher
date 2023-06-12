@@ -81,12 +81,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             )
             Utils.hideKeyboard(requireActivity())
         }
-
-        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                requireActivity().finishAffinity();
-            }
-        })
     }
 
     companion object {

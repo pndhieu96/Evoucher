@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -61,8 +62,11 @@ class GameRouletteFragment : BaseFragment<FragmentRouletteBinding>(FragmentRoule
                 binding.pbLoading.visibility = GONE
 
                 currentPosition = gameResult.randomNumber ?: -1
-                if(currentPosition != -1)
+
+                if(currentPosition != -1) {
+                    Log.d("GameRoulette", "initObserve: $currentPosition")
                     binding.wheelView.startRoulette(currentPosition)
+                }
             },
             onError = {
                 isLoading = false
