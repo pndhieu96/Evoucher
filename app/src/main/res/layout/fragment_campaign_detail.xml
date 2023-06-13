@@ -157,7 +157,10 @@ tools:context=".ui.AccountFragment">
                 android:background="@drawable/bg_btn_play_game"
                 android:text="Chơi ngay game hay!" />
         </LinearLayout>
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="@drawable/campaign_demo"/>
         <ProgressBar
             android:id="@+id/pb_loading"
             android:layout_width="50dp"

@@ -178,6 +178,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.23000002" />
     </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@drawable/user_demo"/>
     <ProgressBar
         android:id="@+id/pb_loading"
         android:layout_width="50dp"

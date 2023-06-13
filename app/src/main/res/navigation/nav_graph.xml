@@ -226,7 +226,8 @@
     <fragment
         android:id="@+id/webViewFragment"
         android:name="com.example.evoucher.ui.WebViewFragment"
-        android:label="WebViewFragment" >
+        android:label="WebViewFragment"
+        tools:layout="@layout/fragment_web_view">
         <argument
             android:name="urlArg"
             app:argType="string"

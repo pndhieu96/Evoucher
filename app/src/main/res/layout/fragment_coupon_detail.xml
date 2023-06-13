@@ -172,7 +172,10 @@
                 android:textStyle="bold"
                 android:text="Sử dụng mã giảm giá ngay nhé !"/>
         </LinearLayout>
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="@drawable/coupon_detail_demo"/>
         <ProgressBar
             android:id="@+id/pb_loading"
             android:layout_width="50dp"

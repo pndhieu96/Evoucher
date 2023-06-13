@@ -8,6 +8,7 @@
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/map_view"
+        tools:background="@drawable/map_demo"
         android:layout_height="match_parent"
         android:layout_width="match_parent"/>
 
