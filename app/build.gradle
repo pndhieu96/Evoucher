@@ -8,6 +8,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Users/hieupham/keystore1')
+            storePassword '12345678'
+            keyAlias 'key01'
+            keyPassword '12345678'
+        }
+    }
     namespace 'com.example.evoucher'
     compileSdk 33
 
@@ -25,6 +33,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {

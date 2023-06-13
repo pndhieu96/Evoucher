@@ -47,7 +47,8 @@ class ActitvityRetainedModule {
             }
             val actualRequest = request.build()
             val response = it.proceed(actualRequest)
-            if(response.code == 401 || response.code == 400) {
+            if(response.code == 401 ||
+                (!actualRequest.url.toString().contains("/login") && response.code == 400)) {
                 sharedPreferencesImp.putString(TOKEN, "")
                 Utils.reload(appContext)
             }
