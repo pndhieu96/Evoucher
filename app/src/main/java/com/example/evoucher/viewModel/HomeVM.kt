@@ -48,9 +48,9 @@ class HomeVM @Inject constructor(val netWorkService: NetWorkService) : ViewModel
                 resource.data?.result?.let {
                     list = it
                 }
-                if(list?.size!! >= 5) {
-                    list = list.subList(0,5)
-                }
+//                if(list?.size!! >= 5) {
+//                    list = list.subList(0,5)
+//                }
                 val campainResource =  Resource.Success(data = list)
                 _campaigns.value = campainResource
             } else {

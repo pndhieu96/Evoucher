@@ -32,6 +32,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     lateinit var industriesAdapter: IndustriesAdapter
     lateinit var campaignAdapter: CampaignAdapter
     lateinit var partnersAdapter: PartnersAdapter
+    private var campaigns: List<Campaign> = arrayListOf()
 
     @SuppressLint("NotifyDataSetChanged")
     override fun initObserve() {
@@ -63,7 +64,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             viewLifecycleOwner,
             onSuccess = {
                 binding.pbLoading.visibility = View.GONE
-                campaignAdapter.list = it
+                campaigns = it
+                campaignAdapter.list = it.subList(0,5)
                 campaignAdapter.notifyDataSetChanged()
             }, onError = {
                 binding.pbLoading.visibility = View.GONE
@@ -98,7 +100,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     CampaignsFragment.BY_INDUSTRY,
                     null,
                     item,
-                    campaignAdapter.list.toTypedArray()
+                    campaigns.toTypedArray()
                 )
                 navController.navigate(action)
             }
@@ -122,7 +124,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     CampaignsFragment.BY_PARTNER,
                     item,
                     null,
-                    campaignAdapter.list.toTypedArray()
+                    campaigns.toTypedArray()
                 )
                 navController.navigate(action)
             }
