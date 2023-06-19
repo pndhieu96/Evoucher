@@ -1,6 +1,8 @@
 package com.example.evoucher.ui
 
+import android.os.Build
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.navArgs
@@ -16,6 +18,7 @@ import com.example.evoucher.utils.ConstantUtils.Companion.TYPE_GAME_ROULETTE
 import com.example.evoucher.utils.Utils.Companion.observer
 import com.example.evoucher.viewModel.GamesVM
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.stream.Collectors
 
 @AndroidEntryPoint
 class GamesFragment : BaseFragment<FragmentGamesBinding>(FragmentGamesBinding::inflate) {
@@ -23,14 +26,19 @@ class GamesFragment : BaseFragment<FragmentGamesBinding>(FragmentGamesBinding::i
     private val vm : GamesVM by viewModels()
     private val args: GamesFragmentArgs by navArgs()
     lateinit var adapter: GamesAdapter
+    lateinit var gameIds : Array<String>
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun initObserve() {
         vm.games.observer(
             viewLifecycleOwner,
             onSuccess = {
                 binding.pbLoading.visibility = View.GONE
                 if(it.size > 0) {
-                    adapter.list = it
+
+                    adapter.list = it.stream().filter {
+                        obj -> gameIds.contains(obj.id.toString())
+                    }.collect(Collectors.toList())
                     adapter.notifyDataSetChanged()
                     binding.rv.visibility = View.VISIBLE
                 } else {
@@ -47,6 +55,7 @@ class GamesFragment : BaseFragment<FragmentGamesBinding>(FragmentGamesBinding::i
     override fun initialize() {
         val campaign = args.campaignArg
         val partner = args.partnerArg
+        gameIds = args.gameIdsArg ?: arrayOf()
         vm.getGames()
         binding.tb.setTitle("Danh sách trò chơi")
         binding.tb.callBack = object : TopBar.CallBack {

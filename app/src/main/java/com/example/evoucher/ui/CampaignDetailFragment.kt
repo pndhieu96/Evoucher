@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
@@ -23,6 +24,9 @@ import com.example.evoucher.utils.ConstantUtils
 import com.example.evoucher.utils.SharedPreferencesImp
 import com.example.evoucher.utils.SharedPreferencesImp.Companion.PARTNERS_INFO
 import com.example.evoucher.utils.Utils
+import com.example.evoucher.utils.Utils.Companion.observer
+import com.example.evoucher.viewModel.CampaignDetailVM
+import com.example.evoucher.viewModel.LoginVM
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.ParseException
@@ -34,11 +38,32 @@ class CampaignDetailFragment : BaseFragment<FragmentCampaignDetailBinding>(Fragm
     @Inject
     lateinit var sPregerences: SharedPreferencesImp
     private val args: CampaignDetailFragmentArgs by navArgs()
+    private val vm : CampaignDetailVM by viewModels()
+    private var gameIds: ArrayList<String>? = null
     private var parners : Partners = Partners()
     private var partner : Partner = Partner()
 
     override fun initObserve() {
+        vm.canpaign.observer(
+            this,
+            onSuccess = { detail ->
+                var coupons = "Gồm các loại coupon: "
+                for(item in detail.loaiCouponX) {
+                    item.loaiCouponName?.let {
+                        val percent = it.substring(it.lastIndexOf(" ") + 1)
+                        coupons += " $percent,"
+                    }
+                }
+                binding.tvVoucher.text = coupons.substring(0, coupons.length - 1)
+                gameIds = detail.troChoiId
+            },
+            onError = {
 
+            },
+            onLoading = {
+
+            }
+        )
     }
 
     override fun initialize() {
@@ -49,9 +74,10 @@ class CampaignDetailFragment : BaseFragment<FragmentCampaignDetailBinding>(Fragm
             }
 
         }
-
         val item = args.campaignArg
+
         item?.let {
+            vm.getCampaignDetail(item.id.toString())
             Glide.with(requireContext())
                 .load(Utils.getImageUrl(item.imgUrl, ConstantUtils.TYPE_IMAGE_CAMPAIGN))
                 .into(binding.ivBg)
@@ -96,11 +122,14 @@ class CampaignDetailFragment : BaseFragment<FragmentCampaignDetailBinding>(Fragm
         }
 
         binding.btnGames.setOnClickListener {
-            val action = CampaignDetailFragmentDirections.actionCampaignDetailFragmentToGamesFragment(
-                item,
-                partner
-            )
-            navController.navigate(action)
+            gameIds?.let {
+                val action = CampaignDetailFragmentDirections.actionCampaignDetailFragmentToGamesFragment(
+                    item,
+                    partner,
+                    it.toTypedArray()
+                )
+                navController.navigate(action)
+            }
         }
     }
 

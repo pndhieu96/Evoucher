@@ -130,6 +130,11 @@
             app:argType="com.example.evoucher.model.Partner"
             app:nullable="true"
             android:defaultValue="@null"/>
+        <argument
+            android:name="gameIdsArg"
+            app:argType="string[]"
+            app:nullable="true"
+            android:defaultValue="@null"/>
         <action
             android:id="@+id/action_gamesFragment_to_rollDiceFragment"
             app:destination="@id/rollDiceFragment" />
