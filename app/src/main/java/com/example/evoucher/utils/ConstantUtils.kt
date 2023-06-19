@@ -2,6 +2,7 @@ package com.example.evoucher.utils
 
 class ConstantUtils {
     companion object {
+        const val TIMEOUT_SECONDS = 30L
         const val BASE_URL = "https://ptc3.ngoinhaso.vn/api/"
         const val TYPE_IMAGE_CAMPAIGN = 0;
         const val TYPE_IMAGE_PARTNER = 1;
@@ -12,6 +13,6 @@ class ConstantUtils {
         const val TYPE_GAME_ROLL_DICE = 2;
         const val TYPE_GAME_ROULETTE = 3;
 
-        const val XXX = false;
+        const val XXX = true;
     }
 }

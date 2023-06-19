@@ -8,7 +8,8 @@ data class UserResult (
 
     @SerializedName("user"     ) var user     : User?     = User(),
     @SerializedName("moreInfo" ) var moreInfo : MoreInfo? = MoreInfo(),
-    @SerializedName("token"    ) var token    : String   = ""
+    @SerializedName("token"    ) var token    : String   = "",
+    @SerializedName("isBlockchain"    ) var isBlockchain    : Boolean   = true,
 ) : Serializable
 
 class User (

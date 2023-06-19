@@ -40,6 +40,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     binding.cbSaveAccount.isChecked
                 )
                 it.user?.password = pass
+                it.isBlockchain = binding.cb.isChecked
                 sPregerences.putString(
                     SharedPreferencesImp.USER_INFO,
                     Gson().toJson(it)

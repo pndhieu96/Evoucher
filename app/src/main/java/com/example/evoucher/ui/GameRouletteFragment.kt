@@ -133,7 +133,7 @@ class GameRouletteFragment : BaseFragment<FragmentRouletteBinding>(FragmentRoule
         uiScope.launch {
             vm.playGames(
                 userResult!!.user!!.id ?: 0, userResult!!.token, 1, 5,
-                game!!.id ?: 0, campaign!!.id ?: 0, ConstantUtils.XXX
+                game!!.id ?: 0, campaign!!.id ?: 0, userResult!!.isBlockchain
             )
         }
     }

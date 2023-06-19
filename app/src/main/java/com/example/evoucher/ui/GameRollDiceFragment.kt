@@ -184,7 +184,7 @@ class GameRollDiceFragment : BaseFragment<FragmentRollDiceBinding>(FragmentRollD
                 delay(minLoadingTime.toLong())
                 vm.playGames(
                     userResult!!.user!!.id ?: 0, userResult!!.token, 2, 12,
-                    game!!.id ?: 0, campaign!!.id ?: 0, ConstantUtils.XXX
+                    game!!.id ?: 0, campaign!!.id ?: 0, userResult!!.isBlockchain
                 )
             }
         }

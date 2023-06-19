@@ -134,7 +134,7 @@ class GameLuckyNumberFragment : BaseFragment<FragmentLuckyNumberBinding>(Fragmen
                 delay(800)
                 vm.playGames(
                     userResult!!.user!!.id ?: 0, userResult!!.token, 1, 100,
-                    game!!.id ?: 0, campaign!!.id ?: 0, XXX
+                    game!!.id ?: 0, campaign!!.id ?: 0, userResult!!.isBlockchain
                 )
             }
         }

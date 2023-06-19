@@ -3,6 +3,7 @@ package com.example.codebaseandroidapp.di
 import android.content.Context
 import androidx.recyclerview.widget.DiffUtil
 import com.example.evoucher.utils.ConstantUtils.Companion.BASE_URL
+import com.example.evoucher.utils.ConstantUtils.Companion.TIMEOUT_SECONDS
 import com.example.evoucher.utils.SharedPreferencesImp
 import com.example.evoucher.utils.SharedPreferencesImp.Companion.TOKEN
 import com.example.evoucher.utils.Utils
@@ -20,6 +21,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.Headers
+import java.util.concurrent.TimeUnit
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -47,8 +49,7 @@ class ActitvityRetainedModule {
             }
             val actualRequest = request.build()
             val response = it.proceed(actualRequest)
-            if(response.code == 401 ||
-                (!actualRequest.url.toString().contains("/login") && response.code == 400)) {
+            if(response.code == 401) {
                 sharedPreferencesImp.putString(TOKEN, "")
                 Utils.reload(appContext)
             }
@@ -64,6 +65,9 @@ class ActitvityRetainedModule {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .addNetworkInterceptor(interceptor)
+            .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .build()
     }
 
