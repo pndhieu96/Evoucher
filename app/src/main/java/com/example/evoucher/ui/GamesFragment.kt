@@ -28,7 +28,6 @@ class GamesFragment : BaseFragment<FragmentGamesBinding>(FragmentGamesBinding::i
     lateinit var adapter: GamesAdapter
     lateinit var gameIds : Array<String>
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun initObserve() {
         vm.games.observer(
             viewLifecycleOwner,
@@ -36,9 +35,9 @@ class GamesFragment : BaseFragment<FragmentGamesBinding>(FragmentGamesBinding::i
                 binding.pbLoading.visibility = View.GONE
                 if(it.size > 0) {
 
-                    adapter.list = it.stream().filter {
+                    adapter.list = it.filter {
                         obj -> gameIds.contains(obj.id.toString())
-                    }.collect(Collectors.toList())
+                    }
                     adapter.notifyDataSetChanged()
                     binding.rv.visibility = View.VISIBLE
                 } else {
